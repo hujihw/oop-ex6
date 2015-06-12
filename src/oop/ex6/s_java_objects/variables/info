@@ -1,0 +1,2 @@
+facade for Java variables or new implementation.
+If using java implemented types from java.lang, can't inherit from SJavaObject.
