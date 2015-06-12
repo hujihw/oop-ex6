@@ -1,7 +1,14 @@
 package oop.ex6.main;
 
+import oop.ex6.sjava_objects.blocks.SuperBlock;
+
 /**
- * @author Omri Kaplan
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class BlockParser {
+class BlockParser {
+    void parseBlock(SuperBlock block) { // todo
+
+    }
+
+
 }
