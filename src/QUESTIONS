@@ -1,0 +1,56 @@
+#Week 10 Questions
+#============
+
+#class A { }
+#class B extends A { }
+#List<? extends A> myList = new LinkedList<B>();
+#Iterator<? extends A> it = myList.iterator();
+#Select all lines that will pass compilation
+#1: A a = it.next();
+#2: B b = it.next();
+#3: B b = (B) it.next();
+#4: <? extends A> a = it.next();
+
+w10Answer1 = (0,0)
+# The answer should be a python-tuple of the chosen numbers, i.e. (1,7,3,8) or (2,6,1)
+# optional explanation (a single line):
+
+#Set<String> stringSet = new HashSet<>();
+#mySet.addAndPrintAll(stringSet);
+#For what declaration of the addAndPrintAll() method will the code compile: (single choice)
+#1: public void addAndPrintAll(Collection<Object>);
+#2: public void addAndPrintAll(Set<Object>);
+#3: public void addAndPrintAll(Collection<? extends String>);
+#4: public void addAndPrintAll(List<? extends Object>);
+
+w10Answer2 = 0
+# optional explanation (a single line):
+
+#Week 11 Questions
+#============
+
+#Pattern p = Pattern.compile("\\s*f*r*\\d+\\w");
+#Matcher m = p.matcher("fff88");
+#boolean b = m.matches();
+#System.out.println(b);
+#What will this program output? (single choice)
+#1: A compilation error
+#2: false
+#3: true
+#4: null pointer exception
+
+w11Answer1 = 0
+# optional explanation (a single line):
+
+#Pattern p = Pattern.compile("Names:(([a-z]+,)+)\\1*");
+#Matcher m = p.matcher("Names:abi,gadi,abi,gadi,abi,gadi,");
+#boolean b = m.matches();
+#System.out.println(m.group(1));
+#What will this program output? (single choice)
+#1: gadi,
+#2: Names:abi,gadi,abi,gadi,abi,gadi,
+#3: abi,gadi,abi,gadi,abi,gadi,
+#4: abi,gadi,
+
+w11Answer2 = 0
+# optional explanation (a single line):
