@@ -1,4 +1,4 @@
-package oop.ex6.s_java_objects.variables;
+package oop.ex6.sjava_objects.variables;
 
 /**
  * @author Omri Kaplan

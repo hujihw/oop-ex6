@@ -1,4 +1,4 @@
-package oop.ex6.s_java_objects.blocks;
+package oop.ex6.sjava_objects.blocks;
 
 /**
  * @author Omri Kaplan
