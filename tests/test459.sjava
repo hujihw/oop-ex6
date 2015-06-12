@@ -1,0 +1,5 @@
+void foo(int c, int b) {
+	return;
+}
+
+foo(8,);

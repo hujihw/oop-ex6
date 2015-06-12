@@ -1,0 +1,4 @@
+void foo() {
+String a = "hello";
+return;
+}

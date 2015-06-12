@@ -1,0 +1,3 @@
+boolean foo() {
+	return true;
+}

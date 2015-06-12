@@ -1,0 +1,9 @@
+void foo() {
+if (true) {
+int a = 5;
+}
+while (false) {
+int a = 5;
+}
+return;
+}

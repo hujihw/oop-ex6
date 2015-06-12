@@ -1,0 +1,5 @@
+int a = 0;
+void foo() {
+if (true) {
+int a = 5;
+}

@@ -1,0 +1,8 @@
+int a = 5;
+void goo() {
+	return;
+}
+void foo() {
+int b = goo();
+return;
+}

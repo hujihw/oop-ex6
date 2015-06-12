@@ -1,0 +1,7 @@
+void foo() {
+boolean a;
+boolean b = true;
+while (a || b) {
+}
+return;
+}

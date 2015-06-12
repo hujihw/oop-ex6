@@ -1,0 +1,5 @@
+void foo() {
+final int a = 5;
+a = 6;
+return;
+}

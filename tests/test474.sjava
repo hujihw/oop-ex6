@@ -1,0 +1,7 @@
+void a() {
+return;
+}
+void a() {
+int a = 9; double f = 6.2;
+return;
+}

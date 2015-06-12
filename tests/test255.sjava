@@ -1,0 +1,5 @@
+int a = 5;
+void foo() {
+foo();
+return;
+}

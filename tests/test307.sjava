@@ -1,0 +1,6 @@
+void foo() {
+char b = '5';
+if (b) {
+}
+return;
+}

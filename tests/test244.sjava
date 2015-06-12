@@ -1,0 +1,4 @@
+void foo() {
+char a = 5;
+return;
+}

@@ -1,0 +1,4 @@
+void foo() {
+String a = 5;
+return;
+}

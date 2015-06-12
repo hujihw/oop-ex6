@@ -1,0 +1,5 @@
+void foo(int c, int b) {
+	return;
+}
+
+int a = foo(9,9);

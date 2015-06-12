@@ -1,0 +1,4 @@
+void foo() {
+i nt a;
+return;
+}

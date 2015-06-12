@@ -1,0 +1,3 @@
+void foo(String a) {
+	return;
+}

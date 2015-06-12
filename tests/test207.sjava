@@ -1,0 +1,4 @@
+void foo() {
+int a = hhh;
+return;
+}

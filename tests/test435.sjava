@@ -1,0 +1,5 @@
+void foo() {
+i f(true){
+}
+return;
+}

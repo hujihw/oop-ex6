@@ -1,0 +1,28 @@
+// A very complex test
+//I am just a comment
+//int a = 5;
+//final int b = 3;
+
+void foo(int a, boolean b) {
+	// Hello
+	int c = a;
+	return;
+}
+
+void doo() {
+	if (true) {
+		return;
+	}
+	goo(5, 44);
+	while(true || 0 || 1) {
+		doo();
+	}
+
+	return;
+}
+
+void goo(int h, int i) {
+	int j = a;
+	return;
+}
+

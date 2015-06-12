@@ -1,0 +1,4 @@
+void foo() {
+final double a = 5.2;
+return;
+}

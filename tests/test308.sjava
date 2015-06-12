@@ -1,0 +1,10 @@
+void foo() {
+boolean b = true;
+if (boo()) {
+}
+return;
+}
+
+void boo() {
+return "1";
+}

@@ -1,0 +1,5 @@
+void foo() {
+while (true && true && 1 ) {
+}
+return;
+}

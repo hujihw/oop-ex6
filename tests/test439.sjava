@@ -1,0 +1,9 @@
+void foo() {
+while(true && foo2(5)) {		
+}
+return;
+}
+
+void foo2(int a) {
+	return;
+}

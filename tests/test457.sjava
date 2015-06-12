@@ -1,0 +1,5 @@
+void foo(String a, boolean b, int c, char d) {
+	return;
+}
+
+foo("Hello");

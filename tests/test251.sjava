@@ -1,0 +1,6 @@
+void foo() {
+int b = a;
+return;
+}
+int a = 5;
+
