@@ -1,4 +1,4 @@
-package oop.ex6.parser;
+package oop.ex6.main;
 
 /**
  * @author Omri Kaplan
