@@ -4,6 +4,7 @@ import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 
 /**
+ * In charge of finding objects up the abstract syntax tree.
  * @author Omri Kaplan and Asaf Etzion
  */
 class Finder {
@@ -23,7 +24,7 @@ class Finder {
      * @param method    The method to find.
      * @return true if the object was found, false else.
      */
-    boolean findMethod(MethodBlock method) {
+    private boolean findMethod(MethodBlock method) {
 
         return false;
     }
@@ -33,7 +34,7 @@ class Finder {
      * @param var    The method to find. // todo add a var parameter according to var package structure.
      * @return true if the object was found, false else.
      */
-    boolean findVar() {
+    private boolean findVar() {
 
         return false;
     }

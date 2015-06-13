@@ -2,7 +2,7 @@ package oop.ex6.main;
 import oop.ex6.main.Parser.*;
 
 /**
- * Created by Asaf on 12/06/2015.
+ * Created by Asaf Etzion and Omri Kaplan
  */
 class Manager {
     private static Manager ourInstance = new Manager();
@@ -21,6 +21,7 @@ class Manager {
      * @param sJavaFilePath the path of the sJava file
      */
     void mainProcedure (String sJavaFilePath){
+        // todo try on the hole procedure. catch exceptions and print 1, otherwise print 2.
         // calls the parsFile
         // calls the parseBlock
 
