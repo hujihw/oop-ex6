@@ -3,26 +3,13 @@ package oop.ex6.sjava_objects.variables;
 import oop.ex6.sjava_objects.SJavaObject;
 
 /**
+ * Represents the type Double of the S-Java language.
  * @author Omri Kaplan
  */
-public class BooleanVar<T> extends SJavaObject {
+public class BooleanVar extends SuperVar{
 
     /* Data Members*/
-    Boolean aBoolean;
-    private T value;
 
     /* Constructors */
     // todo choose right constructor
-    public BooleanVar(boolean value) {
-    }
-
-    public BooleanVar(int value) {
-    }
-
-    public BooleanVar(double value) {
-    }
-
-    public BooleanVar(T value) {
-
-    }
 }

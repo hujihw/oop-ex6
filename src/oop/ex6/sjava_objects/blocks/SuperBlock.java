@@ -7,7 +7,7 @@ import java.util.HashSet;
 /**
  * @author Omri Kaplan
  */
-abstract class SuperBlock extends SJavaObject {
+public abstract class SuperBlock extends SJavaObject {
 
     /* Data Members */
     private HashSet<SJavaObject> containedObjects;

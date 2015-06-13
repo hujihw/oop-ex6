@@ -16,7 +16,7 @@ class Parser {
      */
     static MainBlock parseFile(File theFile) { // todo
         // todo create a MainBlock instance first!
-
+        // todo skip comments and empty lines
         return null;
     }
 

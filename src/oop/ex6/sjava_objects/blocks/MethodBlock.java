@@ -10,4 +10,14 @@ public class MethodBlock extends SuperBlock {
     public MethodBlock(SuperBlock parent) {
         super(parent);
     }
+
+    /**
+     * Called to check validity of parameters on method call.
+     * @param parameters    A string of the parameters
+     * @return true if the parameters are valid, false if not.
+     */
+    public boolean checkParameters(String parameters) {
+        // todo split the parameters. check validity.
+        return false;
+    }
 }

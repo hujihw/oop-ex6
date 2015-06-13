@@ -13,7 +13,7 @@ public class ExpressionsDefiner {
      * @return The object corresponding with the expression.
      */
     public SJavaObject defineExpression(String expression) {
-
+        // todo return null if object was found and no exception raised (calling a method, var assignment...).
         return null;
     }
 
