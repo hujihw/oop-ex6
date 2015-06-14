@@ -1,7 +1,7 @@
 package oop.ex6.main;
-import oop.ex6.main.Parser.*;
 
 /**
+ * The manager of the hole virification process. Calls the Parser an BlockParser, and holds the MainBlock.
  * Created by Asaf Etzion and Omri Kaplan
  */
 class Manager {
@@ -13,14 +13,14 @@ class Manager {
         return ourInstance;
     }
 
-    private Manager() {
+    private Manager() { // todo
     }
 
     /**
      * the main method that runs the whole verifying procedure
      * @param sJavaFilePath the path of the sJava file
      */
-    void mainProcedure (String sJavaFilePath){
+    void mainProcedure (String sJavaFilePath){ // todo
         // todo try on the hole procedure. catch exceptions and print 1, otherwise print 2.
         // calls the parsFile
         // calls the parseBlock

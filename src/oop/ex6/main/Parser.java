@@ -1,5 +1,6 @@
 package oop.ex6.main;
 
+import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MainBlock;
 
 import java.io.File;
@@ -20,5 +21,12 @@ class Parser {
         return null;
     }
 
+    /**
+     * Filter the comments and empty lines and sends other lines to ExpressionDefiner.
+     * @return return the SJava Object returned from ExpressionDefiner. null otherwise.
+     */
+    SJavaObject commentsAndEmptyLinesFilter() { // todo
 
+        return null;
+    }
 }
