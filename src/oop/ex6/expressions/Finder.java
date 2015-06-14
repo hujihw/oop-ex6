@@ -2,6 +2,7 @@ package oop.ex6.expressions;
 
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
+import oop.ex6.sjava_objects.variables.SuperVar;
 
 /**
  * In charge of finding objects up the abstract syntax tree.
@@ -34,8 +35,8 @@ class Finder {
      * @param var    The method to find. // todo add a var parameter according to var package structure.
      * @return true if the object was found, false else.
      */
-    private boolean findVar() {
-
+    private boolean findVar(SuperVar var) {
+        // todo if var was found in a parent (or a parent of a parent...) deep copy to local hash and return t
         return false;
     }
 }

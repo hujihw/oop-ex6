@@ -3,18 +3,32 @@ package oop.ex6.sjava_objects.variables;
 /**
  * @author Omri Kaplan
  */
-abstract class SuperVar {
+public abstract class SuperVar {
 
     /* Data Members */
     private boolean isFinal = false;
     private boolean wasInitialized = false;
-    private int lineNumber;
+    private Type type;
 
     /* Constructors */
 
     /* Methods */
 
-    // todo decide when variable gets final. factory or expression definer.
+    public Type getType() {
+        return type;
+    }
+
+    void setType(Type type) {
+        this.type = type;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
+    }
+
+    void setIsFinal(boolean isFinal) {
+        this.isFinal = isFinal;
+    }
 
     public boolean isWasInitialized() {
         return wasInitialized;
@@ -22,13 +36,5 @@ abstract class SuperVar {
 
     public void setWasInitialized(boolean wasInitialized) {
         this.wasInitialized = wasInitialized;
-    }
-
-    public int getLineNumber() {
-        return lineNumber;
-    }
-
-    public void setLineNumber(int lineNumber) {
-        this.lineNumber = lineNumber;
     }
 }
