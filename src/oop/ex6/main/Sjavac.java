@@ -11,7 +11,7 @@ public class Sjavac {
      * int wrong use, it throw a WrongArgumentsNumberException if the user calls it with no arguments or more than one
      * also it caches the WrongArgumentsNumberException and BadFileException and prints 2 to out stream and the
      * exception cause to the error stream
-     * @param args
+     * @param args should be one in length of 1, args[0] is the path to the sjavac code file.
      */
     public static void main(String[] args) {
 
