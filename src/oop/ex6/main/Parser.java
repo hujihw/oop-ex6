@@ -6,18 +6,21 @@ import oop.ex6.sjava_objects.blocks.MainBlock;
 import java.io.File;
 
 /**
- * @author Omri Kaplan
+ * //todo
+ * @author Omri Kaplan & Asaf Eztion
  */
 class Parser {
 
     /**
-     * This method read the code file.
-     * @param theFile    the file we want to parse.
+     * reads the code file and creates the outer scope, meaning it creates the methods and the global variables.
+     * @param theFile the file we want to parse.
      * @return MainBlock the outer scope block which holds the methods and variables.
      */
-    static MainBlock parseFile(File theFile) { // todo
+    static MainBlock parseFile(File theFile) {
         // todo create a MainBlock instance first!
         // todo skip comments and empty lines
+
+
         return null;
     }
 
