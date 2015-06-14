@@ -1,9 +1,12 @@
 package oop.ex6.main;
 
+import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MainBlock;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * //todo
@@ -16,10 +19,12 @@ class Parser {
      * @param theFile the file we want to parse.
      * @return MainBlock the outer scope block which holds the methods and variables.
      */
-    static MainBlock parseFile(File theFile) {
+    static MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException{
         // todo create a MainBlock instance first!
         // todo skip comments and empty lines
 
+        MainBlock mainBlock = new MainBlock(null);
+        Scanner scanner = new Scanner(theFile);
 
         return null;
     }

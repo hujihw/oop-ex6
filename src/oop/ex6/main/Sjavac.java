@@ -1,5 +1,7 @@
 package oop.ex6.main;
 
+import java.io.FileNotFoundException;
+
 /**
  * the Sjavac is the class from which the user runs the Sjava verifier application.
  * @author Omri Kaplan & Asaf Eztion
@@ -21,7 +23,7 @@ public class Sjavac {
             Manager.getInstance().mainProcedure(args[0]);}
 
         }
-        catch (WrongArgumentsNumberException | BadFileException exp){
+        catch (WrongArgumentsNumberException | BadFileException | FileNotFoundException exp){
             String IO_ERROR = "2";
             System.out.println(IO_ERROR);
             System.err.println(exp.getMessage());
