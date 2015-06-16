@@ -1,9 +1,11 @@
 package oop.ex6.sjava_objects.variables;
 
+import oop.ex6.sjava_objects.SJavaObject;
+
 /**
  * @author Omri Kaplan
  */
-public abstract class SuperVar {
+public abstract class SuperVar extends SJavaObject{
 
     /* Data Members */
     private boolean isFinal = false;
