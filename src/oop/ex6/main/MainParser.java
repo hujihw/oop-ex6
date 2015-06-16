@@ -33,10 +33,10 @@ class MainParser {
             SJavaObject object = commentsAndEmptyLinesFilter(line);
             if (object != null) {
                 if (object instanceof MethodBlock){
-
+                    
                 }
                 else if (object instanceof SuperVar){
-//                    mainBlock.
+                    mainBlock.addVariable(object.getName(),(SuperVar) object); //todo consider generics
                 }
             }
         }

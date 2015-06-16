@@ -20,6 +20,15 @@ public class MainBlock extends SuperBlock {
     /* methods */
 
     /**
+     * delegates the putt method to the methods hash table
+     * @param key the name of the mathod
+     * @param value the method object
+     */
+    public void addMethod(String key, MethodBlock value) {
+        methods.put(key, value);
+    }
+
+    /**
      * gets all of the methods, in Sjava all of the methods are declared on the outer scope.
      * @return all of the methods
      */
