@@ -25,7 +25,9 @@ class MainParser {
         MainBlock mainBlock = new MainBlock(null);
         Scanner scanner = new Scanner(theFile);
 
-//        while (scanner.hasNext())
+        while (scanner.hasNextLine()){
+
+        }
 
         return null;
     }
