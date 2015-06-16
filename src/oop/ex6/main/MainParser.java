@@ -20,11 +20,12 @@ class MainParser {
      * @return MainBlock the outer scope block which holds the methods and variables.
      */
     static MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException{
-        // todo create a MainBlock instance first!
         // todo skip comments and empty lines
 
         MainBlock mainBlock = new MainBlock(null);
         Scanner scanner = new Scanner(theFile);
+
+//        while (scanner.hasNext())
 
         return null;
     }
@@ -33,7 +34,7 @@ class MainParser {
      * Filter the comments and empty lines and sends other lines to ExpressionDefiner.
      * @return return the SJava Object returned from ExpressionDefiner. null otherwise.
      */
-    SJavaObject commentsAndEmptyLinesFilter() { // todo
+    static SJavaObject commentsAndEmptyLinesFilter() { // todo
 
         return null;
     }
