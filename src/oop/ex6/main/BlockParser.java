@@ -5,6 +5,7 @@ import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
+import oop.ex6.sjava_objects.variables.SuperVar;
 
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ import java.util.Scanner;
  */
 public class BlockParser { // tester todo change to package local
     /* Data Members */
-    private BlockParser ourInstance = new BlockParser();
+    private static BlockParser ourInstance = new BlockParser();
     private Scanner scanner;
 
     /* Constructor */
@@ -29,7 +30,7 @@ public class BlockParser { // tester todo change to package local
      * The singleton getter.
      * @return the BlockParser instance.
      */
-    public BlockParser getInstance() {
+    public static BlockParser getInstance() {
         return ourInstance;
     }
 
@@ -50,7 +51,9 @@ public class BlockParser { // tester todo change to package local
             SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line);
             if (expressionObject != null) {
                 if (expressionObject instanceof SuperBlock) {
-                    parseBlock((SuperBlock) expressionObject);
+                    parseBlock((SuperBlock) expressionObject); // todo consider generics, not down casting.
+                } else if (expressionObject instanceof SuperVar) {
+
                 }
             }
         }
@@ -60,8 +63,8 @@ public class BlockParser { // tester todo change to package local
      * Recursively parse SJava code blocks (scopes).
      * @param block    the block to parse.
      */
-    void parseBlock(SuperBlock block) { // todo
-        System.out.println("got this block: "); // tester
+    public void parseBlock(SuperBlock block) { // tester todo package-local.
+        System.out.println("got this block: " + block.toString()); // tester
     }
 
 

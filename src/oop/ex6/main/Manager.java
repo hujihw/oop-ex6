@@ -40,7 +40,7 @@ class Manager {
             theFile = new File(sJavaFilePath);
             mainBlock = MainParser.parseFile(theFile);
             for (MethodBlock method : mainBlock.getAllMethods()) { // todo verify not returning null.
-                BlockParser.parseBlock(method);
+                BlockParser.getInstance().parseBlock(method);
             }
             System.out.println("0");
         } catch (SJavaException e) {
