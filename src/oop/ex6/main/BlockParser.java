@@ -1,5 +1,9 @@
 package oop.ex6.main;
 
+import oop.ex6.expressions.ExpressionsDefiner;
+import oop.ex6.sjava_objects.SJavaException;
+import oop.ex6.sjava_objects.SJavaObject;
+import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
 
 import java.util.Scanner;
@@ -7,11 +11,57 @@ import java.util.Scanner;
 /**
  * @author Omri Kaplan and Asaf Etzion
  */
-class BlockParser {
-    static void parseBlock(SuperBlock block) { // todo
-        /* Data Members */
-//        Scanner scanner = new Scanner() todo scanner get a string from array. gets it from the MainParser.
-        // todo skip comments and empty lines. Get this method from MainParser.
+public class BlockParser { // tester todo change to package local
+    /* Data Members */
+    private BlockParser ourInstance = new BlockParser();
+    private Scanner scanner;
+
+    /* Constructor */
+    /**
+     * Default singleton constructor.
+     */
+    private BlockParser() {
+    }
+
+    /* Methods */
+
+    /**
+     * The singleton getter.
+     * @return the BlockParser instance.
+     */
+    public BlockParser getInstance() {
+        return ourInstance;
+    }
+
+    /**
+     * Parse a method block.
+     * @param methodBlock    the method block to parse.
+     */
+    void parseMethod(MethodBlock methodBlock) {
+        this.scanner = methodBlock.getScanner();
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            while (line.trim().equals("return;")){
+                line = scanner.nextLine();
+                if (line.trim().equals("}")) {
+                    return;
+                }
+            }
+            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line);
+            if (expressionObject != null) {
+                if (expressionObject instanceof SuperBlock) {
+                    parseBlock((SuperBlock) expressionObject);
+                }
+            }
+        }
+    }
+
+    /**
+     * Recursively parse SJava code blocks (scopes).
+     * @param block    the block to parse.
+     */
+    void parseBlock(SuperBlock block) { // todo
+        System.out.println("got this block: "); // tester
     }
 
 

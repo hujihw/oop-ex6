@@ -24,4 +24,12 @@ public class MethodBlock extends SuperBlock {
         // todo split the parameters. check validity.
         return false;
     }
+
+    /**
+     * A getter to the scanner of the current method.
+     * @return the scanner object of the method.
+     */
+    public Scanner getScanner() {
+        return scanner;
+    }
 }

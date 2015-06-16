@@ -12,7 +12,7 @@ public class ExpressionsDefiner {
      * @param expression    The expression we want to define.
      * @return The object corresponding with the expression.
      */
-    public SJavaObject defineExpression(String expression) {
+    public static SJavaObject defineExpression(String expression) {
         // todo return null if object was found and no exception raised (calling a method, var assignment...).
         return null;
     }

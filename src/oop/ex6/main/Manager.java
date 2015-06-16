@@ -3,7 +3,6 @@ package oop.ex6.main;
 import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.blocks.MainBlock;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
