@@ -39,9 +39,10 @@ class MainParser {
 
             if (object != null) {
                 if (object instanceof MethodBlock){
-                    //todo set scanner with clone!
+                    Scanner methodScanner = new Scanner(theFile);
+                    methodScanner.findWithinHorizon(line, 0); // zero horizon means no bounding to the search
+                    ((MethodBlock) object).setScanner(methodScanner); //todo test!
                     mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
-
                     advanceToClosingBracket();
                 }
                 else if (object instanceof SuperVar){
@@ -53,6 +54,10 @@ class MainParser {
         return null;
     }
 
+    /**
+     * advances the scanner to the line ending the method declaration.
+     * @throws UnclosedBlockException indicates that a method declaration didn't end properly.
+     */
     static void advanceToClosingBracket() throws UnclosedBlockException{
         int bracketCounter = 1; // starts with 1 because we already passed one opening bracket
         while (scanner.hasNext()){
