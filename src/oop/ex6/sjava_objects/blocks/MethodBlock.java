@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MethodBlock extends SuperBlock {
     /* Data Members */
     // data member to hold the signature of the method (parameters by order)
-    Scanner scanner;
+    private Scanner scanner;
 
     public MethodBlock(MainBlock parent, Scanner scanner) { //todo check MainBlock is ok (was SuperBlock)
         super(parent);
@@ -32,4 +32,6 @@ public class MethodBlock extends SuperBlock {
     public Scanner getScanner() {
         return scanner;
     }
+
+    //todo add a scanner setter
 }
