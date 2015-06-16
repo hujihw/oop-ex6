@@ -12,7 +12,7 @@ import java.util.Scanner;
  * //todo
  * @author Omri Kaplan & Asaf Eztion
  */
-class Parser {
+class MainParser {
 
     /**
      * reads the code file and creates the outer scope, meaning it creates the methods and the global variables.

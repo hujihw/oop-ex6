@@ -10,8 +10,8 @@ import java.util.Scanner;
 class BlockParser {
     static void parseBlock(SuperBlock block) { // todo
         /* Data Members */
-//        Scanner scanner = new Scanner() todo scanner get a string from array. gets it from the Parser.
-        // todo skip comments and empty lines. Get this method from Parser.
+//        Scanner scanner = new Scanner() todo scanner get a string from array. gets it from the MainParser.
+        // todo skip comments and empty lines. Get this method from MainParser.
     }
 
 

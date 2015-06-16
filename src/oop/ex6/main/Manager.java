@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * The manager of the whole verification process. Calls the Parser an BlockParser, and holds the MainBlock.
+ * The manager of the whole verification process. Calls the MainParser an BlockParser, and holds the MainBlock.
  * @author Asaf Etzion & Omri Kaplan
  */
 class Manager {
@@ -39,7 +39,7 @@ class Manager {
     void mainProcedure (String sJavaFilePath) throws BadFileException, FileNotFoundException {
         try {
             theFile = new File(sJavaFilePath);
-            mainBlock = Parser.parseFile(theFile);
+            mainBlock = MainParser.parseFile(theFile);
             for (MethodBlock method : mainBlock.getAllMethods()) { // todo verify not returning null.
                 BlockParser.parseBlock(method);
             }
