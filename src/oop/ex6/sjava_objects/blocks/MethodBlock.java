@@ -1,14 +1,18 @@
 package oop.ex6.sjava_objects.blocks;
 
+import java.util.Scanner;
+
 /**
  * @author Omri Kaplan
  */
 public class MethodBlock extends SuperBlock {
     /* Data Members */
     // data member to hold the signature of the method (parameters by order)
+    Scanner scanner;
 
-    public MethodBlock(SuperBlock parent) {
+    public MethodBlock(MainBlock parent, Scanner scanner) { //todo check MainBlock is ok (was SuperBlock)
         super(parent);
+        this.scanner = scanner;
     }
 
     /**
