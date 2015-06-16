@@ -15,10 +15,21 @@ class Manager {
 
     /* Data Members */
     private MainBlock mainBlock;
+    private File theFile; // todo maybe needs to be package-local.
     static Manager ourInstance = new Manager();
 
     /* Constructor */
     private Manager() {
+    }
+
+    /* Methods */
+
+    /**
+     * The file object getter
+     * @return the file.
+     */
+    public File getTheFile() {
+        return theFile;
     }
 
     /**
@@ -27,7 +38,8 @@ class Manager {
      */
     void mainProcedure (String sJavaFilePath) throws BadFileException, FileNotFoundException {
         try {
-            mainBlock = Parser.parseFile(new File(sJavaFilePath));
+            theFile = new File(sJavaFilePath);
+            mainBlock = Parser.parseFile(theFile);
             for (MethodBlock method : mainBlock.getAllMethods()) { // todo verify not returning null.
                 BlockParser.parseBlock(method);
             }
