@@ -39,7 +39,9 @@ class MainParser {
 
             if (object != null) {
                 if (object instanceof MethodBlock){
+                    //todo set scanner with clone!
                     mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
+
                     advanceToClosingBracket();
                 }
                 else if (object instanceof SuperVar){
@@ -57,11 +59,9 @@ class MainParser {
 
             String line = scanner.nextLine();
 
-            if ((line.substring(line.lastIndexOf(" ")+1).equals("{"))){ //todo convert maybe to regex
-                //todo set scanner with clone!
+            if ((line.substring(line.trim().lastIndexOf(" ")+1,line.trim().length()).equals("{"))){ //todo convert maybe to regex
                 bracketCounter++;
-                }
-            else if (line.equals("}")){
+                } else if (line.trim().equals("}")){
                 bracketCounter--;
             }
 

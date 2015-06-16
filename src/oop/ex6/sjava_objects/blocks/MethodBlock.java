@@ -10,9 +10,8 @@ public class MethodBlock extends SuperBlock {
     // data member to hold the signature of the method (parameters by order)
     private Scanner scanner;
 
-    public MethodBlock(MainBlock parent, Scanner scanner) { //todo check MainBlock is ok (was SuperBlock)
+    public MethodBlock(MainBlock parent) { //todo check MainBlock is ok (was SuperBlock)
         super(parent);
-        this.scanner = scanner;
     }
 
     /**
@@ -33,5 +32,11 @@ public class MethodBlock extends SuperBlock {
         return scanner;
     }
 
-    //todo add a scanner setter
+    /**
+     * setter for the scanner data member
+     * @param scanner the scanner to be set
+     */
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
 }
