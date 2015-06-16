@@ -33,9 +33,8 @@ public abstract class SuperBlock extends SJavaObject {
      * delegates the putt method to the variables hash table
      * @param key the name of the variable
      * @param value the variable object
-     * @return
      */
-    public SuperVar addVariable(String key, SuperVar value) {
-        return variables.put(key, value);
+    public void addVariable(String key, SuperVar value) {
+        variables.put(key, value);
     }
 }

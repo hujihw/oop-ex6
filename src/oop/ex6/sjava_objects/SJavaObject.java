@@ -1,7 +1,21 @@
 package oop.ex6.sjava_objects;
 
 /**
- * @author Omri Kaplan
+ * todo
+ *  @author Omri Kaplan & Asaf Etzion
  */
 public class SJavaObject {
+
+    /* data members */
+    private String name;
+
+    /* methods */
+
+    /**
+     * a getter for the name member
+     * @return the name of the SJavaObject
+     */
+    public String getName() {
+        return name;
+    }
 }
