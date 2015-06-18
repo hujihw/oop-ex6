@@ -1,5 +1,6 @@
 package oop.ex6.main;
 
+import oop.ex6.expressions.ExpressionsDefiner;
 import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MainBlock;
@@ -10,6 +11,7 @@ import oop.ex6.sjava_objects.variables.SuperVar;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * //todo
@@ -81,7 +83,12 @@ class MainParser {
      * Filter the comments and empty lines and sends other lines to ExpressionDefiner.
      * @return return the SJava Object returned from ExpressionDefiner. null otherwise.
      */
-    static SJavaObject commentsAndEmptyLinesFilter(String line) { // todo
+    static SJavaObject commentsAndEmptyLinesFilter(String line) { // todo test
+
+        Pattern p = Pattern.compile("^//.*|\\s*");
+        if (!p.matcher(line).matches()){ //negates the pattern to filter empty lines and line comments
+            ExpressionsDefiner.defineExpression(line);
+        }
 
         return null;
     }
