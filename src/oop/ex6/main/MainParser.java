@@ -52,8 +52,7 @@ class MainParser {
                 }
             }
         }
-
-        return null;
+        return mainBlock;
     }
 
     /**
