@@ -1,6 +1,10 @@
 package oop.ex6.expressions;
 
 import oop.ex6.sjava_objects.SJavaObject;
+import oop.ex6.sjava_objects.blocks.IfBlock;
+import oop.ex6.sjava_objects.variables.IntVar;
+
+import java.util.Random;
 
 /**
  * Defines String expressions, and return corresponding S-Java objects.
@@ -14,6 +18,13 @@ public class ExpressionsDefiner {
      */
     public static SJavaObject defineExpression(String expression) {
         // todo return null if object was found and no exception raised (calling a method, var assignment...).
+        Random randInt = new Random();
+        switch (randInt.nextInt(2)) {
+            case 0:
+                return new IfBlock(null);
+            case 1:
+                return new IntVar();
+        }
         return null;
     }
 
