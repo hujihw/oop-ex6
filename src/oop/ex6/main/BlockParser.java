@@ -38,17 +38,21 @@ public class BlockParser { // tester todo change to package local
      * Parse a method block.
      * @param methodBlock    the method block to parse.
      */
-    void parseMethod(MethodBlock methodBlock) {
+    public void parseMethod(MethodBlock methodBlock) { // tester todo make package local
         this.scanner = methodBlock.getScanner();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             while (line.trim().equals("return;")){
+                System.out.println("found 'return;'"); // tester
                 line = scanner.nextLine();
                 if (line.trim().equals("}")) {
+                    System.out.println("found '}'"); // tester
                     return;
                 }
             }
             SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line);
+            System.out.println(line); // tester
+            System.out.println(expressionObject == null);
             if (expressionObject != null) { // note commentsAndEmptyLinesFilter() not implemented.
                 varOrBlockHandle(methodBlock, expressionObject);
             }
@@ -75,8 +79,10 @@ public class BlockParser { // tester todo change to package local
 
     private void varOrBlockHandle(SuperBlock theBlock, SJavaObject theObject) {
         if (theObject instanceof SuperBlock) {
+            System.out.println("Got a block!"); // tester
             parseBlock((SuperBlock) theObject); // todo consider generics, not down casting.
         } else if (theObject instanceof SuperVar) {
+            System.out.println("Got a var!"); // tester
             theBlock.addVariable(theObject.getName(), (SuperVar) theObject);
         }
     }

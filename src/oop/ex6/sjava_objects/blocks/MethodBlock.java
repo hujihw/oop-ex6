@@ -9,6 +9,7 @@ public class MethodBlock extends SuperBlock {
     /* Data Members */
     // data member to hold the signature of the method (parameters by order)
     private Scanner scanner;
+    // todo array of parameter types ordered as the method declaration order.
 
     public MethodBlock(MainBlock parent) { //todo check MainBlock is ok (was SuperBlock)
         super(parent);
@@ -39,4 +40,6 @@ public class MethodBlock extends SuperBlock {
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
+
+    // todo method to compare parameters given, with parameters field.
 }

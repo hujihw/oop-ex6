@@ -18,13 +18,7 @@ public class ExpressionsDefiner {
      */
     public static SJavaObject defineExpression(String expression) {
         // todo return null if object was found and no exception raised (calling a method, var assignment...).
-        Random randInt = new Random();
-        switch (randInt.nextInt(2)) {
-            case 0:
-                return new IfBlock(null);
-            case 1:
-                return new IntVar();
-        }
+
         return null;
     }
 
