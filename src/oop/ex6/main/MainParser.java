@@ -81,15 +81,13 @@ class MainParser {
 
     /**
      * Filter the comments and empty lines and sends other lines to ExpressionDefiner.
-     * @return return the SJava Object returned from ExpressionDefiner. null otherwise.
+     * @return return the SJava Object returned from ExpressionDefiner, or null if the line was a comment or blank.
      */
     static SJavaObject commentsAndEmptyLinesFilter(String line) { // todo test
 
         Pattern p = Pattern.compile("^//.*|\\s*");
         if (!p.matcher(line).matches()){ //negates the pattern to filter empty lines and line comments
-            ExpressionsDefiner.defineExpression(line);
-        }
-
-        return null;
+            return ExpressionsDefiner.defineExpression(line);
+        } else return null;
     }
 }
