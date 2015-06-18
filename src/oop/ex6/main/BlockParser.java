@@ -10,7 +10,7 @@ import oop.ex6.sjava_objects.variables.SuperVar;
 import java.util.Scanner;
 
 /**
- * @author Omri Kaplan and Asaf Etzion
+ * @author Omri Kaplan & Asaf Etzion
  */
 public class BlockParser { // tester todo change to package local
     /* Data Members */
@@ -49,12 +49,8 @@ public class BlockParser { // tester todo change to package local
                 }
             }
             SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line);
-            if (expressionObject != null) {
-                if (expressionObject instanceof SuperBlock) {
-                    parseBlock((SuperBlock) expressionObject); // todo consider generics, not down casting.
-                } else if (expressionObject instanceof SuperVar) {
-
-                }
+            if (expressionObject != null) { // note commentsAndEmptyLinesFilter() not implemented.
+                varOrBlockHandle(methodBlock, expressionObject);
             }
         }
     }
@@ -64,8 +60,24 @@ public class BlockParser { // tester todo change to package local
      * @param block    the block to parse.
      */
     public void parseBlock(SuperBlock block) { // tester todo package-local.
-        System.out.println("got this block: " + block.toString()); // tester
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.trim().equals("}")) {
+                return;
+            }
+            // send to Expressions to turn the line into
+            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line);
+            if (expressionObject != null) { // note commentsAndEmptyLinesFilter() not implemented.
+                varOrBlockHandle(block, expressionObject);
+            }
+        }
     }
 
-
+    private void varOrBlockHandle(SuperBlock theBlock, SJavaObject theObject) {
+        if (theObject instanceof SuperBlock) {
+            parseBlock((SuperBlock) theObject); // todo consider generics, not down casting.
+        } else if (theObject instanceof SuperVar) {
+            theBlock.addVariable(theObject.getName(), (SuperVar) theObject);
+        }
+    }
 }
