@@ -22,5 +22,5 @@ public class OmriExpDef {
     final String VARIABLE_DECLARATION = "\\s*" + VARIABLE_TYPE + "\\s+" + VARIABLE_NAME + "\\s*=\\s*(" +
             NUMBERS + "|\\S+)\\s*";
 
-    final String CALL_METHOD = "";
+    final String CALL_METHOD = "\\s*" + METHOD_NAME + "\\s*\\(";
 }
