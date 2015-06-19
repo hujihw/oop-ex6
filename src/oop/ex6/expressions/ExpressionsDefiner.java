@@ -12,14 +12,22 @@ import java.util.regex.Pattern;
  * @author Omri Kaplan
  */
 public class ExpressionsDefiner {
+
+
+    /* Data Members */
+
+    /* Methods */
+
     /**
      * Define an S-Java expression, and do the appropriate task.
      * @param expression    The expression we want to define.
      * @return The object corresponding with the expression.
      */
     public static SJavaObject defineExpression(String expression) {
-
-        /* Data Members */
+        final String METHOD_NAME = "[a-zA-Z]\\w*";
+        final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
+        final String VARIABLE_TYPES = "int|double|String|boolean|char";
+        final String VARIABLE_VALUE = ".+";
 
         // todo return null if object was found and no exception raised (calling a method, var assignment...).
         // method declaration block

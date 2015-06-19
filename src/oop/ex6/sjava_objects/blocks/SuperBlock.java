@@ -35,6 +35,6 @@ public abstract class SuperBlock extends SJavaObject {
      * @param value the variable object
      */
     public void addVariable(String key, SuperVar value) {
-        variables.put(key, value);
+9        variables.put(key, value);
     }
 }
