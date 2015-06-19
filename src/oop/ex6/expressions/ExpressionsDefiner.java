@@ -50,4 +50,3 @@ public class ExpressionsDefiner {
         return null;
     }
 }
-// \s*void\s+\w+\s*\(\s*((\s*\w+\s+\w+\s*,\s*)*+(\s*\w+\s+\w+))|()\s*\)\s*\{\s*
