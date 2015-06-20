@@ -38,7 +38,7 @@ class BlockParser {
      * Parse a method block.
      * @param methodBlock    the method block to parse.
      */
-    void parseMethod(MethodBlock methodBlock) {
+    void parseMethod(MethodBlock methodBlock) throws SJavaException{
         this.scanner = methodBlock.getScanner();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -60,7 +60,7 @@ class BlockParser {
      * Recursively parse SJava code blocks (scopes).
      * @param block    the block to parse.
      */
-    void parseBlock(SuperBlock block) {
+    void parseBlock(SuperBlock block) throws SJavaException{
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.trim().equals("}")) {
@@ -79,7 +79,7 @@ class BlockParser {
      * @param currentBlock    The block we currently parse.
      * @param theObject       The given SJava object.
      */
-    private void varOrBlockHandle(SuperBlock currentBlock, SJavaObject theObject) {
+    private void varOrBlockHandle(SuperBlock currentBlock, SJavaObject theObject) throws SJavaException{
         if (theObject instanceof SuperBlock) {
             ((SuperBlock) theObject).setParent(currentBlock);
             parseBlock((SuperBlock) theObject); // todo consider generics, not down casting.

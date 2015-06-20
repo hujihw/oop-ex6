@@ -10,9 +10,13 @@ public class FinalDecorator extends SuperVar {
     String name;
 
     /* Constructor */
-    FinalDecorator(String[] varDeclaration) {
-        variable = VarFactory.produceVariable(varDeclaration);
-        setIsFinal(true);
+//    FinalDecorator(String[] varDeclaration) { // todo comment out this for compilation
+//        variable = VarFactory.produceVariable(varDeclaration); // todo comment out this for compilation
+//        setIsFinal(true); // todo comment out for compilation
+//    }
+
+    public FinalDecorator(SuperVar superVar) { // todo wrote this for compilation
+        super(superVar);
     }
 
     /* Methods */

@@ -31,7 +31,7 @@ class MainParser {
      */
     static MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException {
 
-        MainBlock mainBlock = new MainBlock(null);
+        MainBlock mainBlock = new MainBlock(); // todo check maybe change to parent is null
         scanner = new Scanner(theFile);
 
         while (scanner.hasNextLine()){
