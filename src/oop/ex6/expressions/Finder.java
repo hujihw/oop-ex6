@@ -2,6 +2,7 @@ package oop.ex6.expressions;
 
 import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
+import oop.ex6.sjava_objects.blocks.IllegalBlockException;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
 import oop.ex6.sjava_objects.variables.SuperVar;
@@ -36,7 +37,7 @@ class Finder {
      * @param parameters    The parameters of the method.
      * @return The new method block object if it was not exist, or null if it was.
      */
-    static SuperBlock declareMethod(String methodName, String parameters) throws ObjectExistException {
+    static SuperBlock declareMethod(String methodName, String parameters) throws ObjectExistException, IllegalBlockException {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         if (found == null) {
             SuperBlock newMethod = BlockFactory.produceBlock(methodName, parameters);
