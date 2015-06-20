@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * @author Omri Kaplan & Asaf Etzion
  */
-public class BlockParser { // tester todo change to package local
+class BlockParser {
     /* Data Members */
     private static BlockParser ourInstance = new BlockParser();
     private Scanner scanner;
@@ -48,9 +48,9 @@ public class BlockParser { // tester todo change to package local
                     return;
                 }
             }
-            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line);
+            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line, methodBlock);
             System.out.println(expressionObject == null);
-            if (expressionObject != null) { // note commentsAndEmptyLinesFilter() not implemented.
+            if (expressionObject != null) {
                 varOrBlockHandle(methodBlock, expressionObject);
             }
         }
@@ -67,8 +67,8 @@ public class BlockParser { // tester todo change to package local
                 return;
             }
             // send to Expressions to turn the line into
-            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line);
-            if (expressionObject != null) { // note commentsAndEmptyLinesFilter() not implemented.
+            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line, block);
+            if (expressionObject != null) {
                 varOrBlockHandle(block, expressionObject);
             }
         }

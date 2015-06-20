@@ -10,12 +10,12 @@ import java.io.FileNotFoundException;
  * The manager of the whole verification process. Calls the MainParser an BlockParser, and holds the MainBlock.
  * @author Asaf Etzion & Omri Kaplan
  */
-class Manager {
+public class Manager {
 
     /* Data Members */
     private MainBlock mainBlock;
     private File theFile; // todo maybe needs to be package-local.
-    static Manager ourInstance = new Manager();
+    private static Manager ourInstance = new Manager();
 
     /* Constructor */
     private Manager() {
@@ -24,10 +24,10 @@ class Manager {
     /* Methods */
 
     /**
-     * The file object getter
+     * The source file object getter
      * @return the file.
      */
-    public File getTheFile() {
+    public File getTheSourceFile() {
         return theFile;
     }
 
@@ -61,7 +61,7 @@ class Manager {
      * The Manager instance getter.
      * @return The only manager instance.
      */
-    static Manager getInstance() {
+    public static Manager getInstance() {
         return ourInstance;
     }
 

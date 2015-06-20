@@ -1,7 +1,9 @@
 package oop.ex6.expressions;
 
+import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
+import oop.ex6.sjava_objects.blocks.SuperBlock;
 import oop.ex6.sjava_objects.variables.SuperVar;
 
 /**
@@ -10,33 +12,35 @@ import oop.ex6.sjava_objects.variables.SuperVar;
  */
 class Finder {
 
-    /**
-     * Searching for an object in the local scope. If it wasn't found, search up the abstract compile tree.
-     * @param object    The object to find.
-     * @return true if the object was found, false else.
-     */
-    boolean findObject(SJavaObject object) {
-
-        return false;
-    }
+    /* Methods */
 
     /**
      * Search for a method in the root block of the abstract compile tree.
-     * @param method    The method to find.
+     * @param methodName    The name of the method to find.
      * @return true if the object was found, false else.
      */
-    private boolean findMethod(MethodBlock method) {
-
-        return false;
+    private static boolean findMethod(String methodName) {
+        return (Manager.getInstance().getMainBlock().getMethod(methodName) != null);
     }
 
     /**
      * Search for a variable in the current scope. If it wasn't found look up the abstract compile tree.
-     * @param var    The method to find. // todo add a var parameter according to var package structure.
+     * @param varName    The name of the variable to find.
      * @return true if the object was found, false else.
      */
-    private boolean findVar(SuperVar var) {
+    private static boolean findVar(String varName, SuperBlock currentBlock) {
         // todo if var was found in a parent (or a parent of a parent...) deep copy to local hash and return t
+        SuperVar result = currentBlock.getVariable(varName);
+        if (result == null) {
+            while (currentBlock.getParent() != null) {
+                currentBlock = currentBlock.getParent();
+                result = currentBlock.getVariable(varName);
+                if (result != null) {
+//                    return result.getType();
+                }
+            }
+        }
+
         return false;
     }
 }

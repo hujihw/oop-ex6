@@ -37,7 +37,7 @@ class MainParser {
         while (scanner.hasNextLine()){
 
             String line = scanner.nextLine();
-            SJavaObject object = commentsAndEmptyLinesFilter(line);
+            SJavaObject object = commentsAndEmptyLinesFilter(line, mainBlock);
 
             if (object != null) {
                 if (object instanceof MethodBlock){
@@ -82,11 +82,11 @@ class MainParser {
      * Filter the comments and empty lines and sends other lines to ExpressionDefiner.
      * @return return the SJava Object returned from ExpressionDefiner, or null if the line was a comment or blank.
      */
-    static SJavaObject commentsAndEmptyLinesFilter(String line) { // todo test
+    static SJavaObject commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) { // todo test
 
         Pattern p = Pattern.compile("^//.*|\\s*");
         if (!p.matcher(line).matches()){ //negates the pattern to filter empty lines and line comments
-            return ExpressionsDefiner.defineExpression(line);
+            return ExpressionsDefiner.defineExpression(line, currentBlock);
         } else return null;
     }
 }

@@ -2,6 +2,7 @@ package oop.ex6.expressions;
 
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.IfBlock;
+import oop.ex6.sjava_objects.blocks.SuperBlock;
 import oop.ex6.sjava_objects.variables.IntVar;
 
 import java.util.Random;
@@ -23,7 +24,7 @@ public class ExpressionsDefiner {
      * @param expression    The expression we want to define.
      * @return The object corresponding with the expression.
      */
-    public static SJavaObject defineExpression(String expression) {
+    public static SJavaObject defineExpression(String expression, SuperBlock currentBlock) {
         final String METHOD_NAME = "[a-zA-Z]\\w*";
         final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
         final String VARIABLE_TYPES = "int|double|String|boolean|char";

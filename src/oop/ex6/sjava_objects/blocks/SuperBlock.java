@@ -35,6 +35,23 @@ public abstract class SuperBlock extends SJavaObject {
      * @param value the variable object
      */
     public void addVariable(String key, SuperVar value) {
-9        variables.put(key, value);
+        variables.put(key, value);
+    }
+
+    /**
+     * Delegates the get method of the variables Hash table.
+     * @param key    The key of the variable object we want to get.
+     * @return The variable object found.
+     */
+    public SuperVar getVariable(String key) {
+        return variables.get(key);
+    }
+
+    /**
+     * The parent block getter.
+     * @return The parent block.
+     */
+    public SuperBlock getParent() {
+        return parent;
     }
 }
