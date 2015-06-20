@@ -19,7 +19,7 @@ public class BlockFactory {
         switch (blockType) {
             case "main":
                 return new MainBlock();
-            case "IfWhile":
+            case "ifWhile":
 //            return new IfWhileBlock();
                 break;
             default:
