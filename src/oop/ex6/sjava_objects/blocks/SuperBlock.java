@@ -54,4 +54,12 @@ public abstract class SuperBlock extends SJavaObject {
     public SuperBlock getParent() {
         return parent;
     }
+
+    /**
+     * The parent block setter.
+     * @param parent    The parent block of the current block.
+     */
+    public void setParent(SuperBlock parent) {
+        this.parent = parent;
+    }
 }
