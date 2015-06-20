@@ -1,7 +1,6 @@
 package oop.ex6.expressions;
 
 import oop.ex6.main.Manager;
-import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
@@ -37,12 +36,12 @@ class Finder {
      * @param parameters    The parameters of the method.
      * @return The new method block object if it was not exist, or null if it was.
      */
-    static SuperBlock declareMethod(String methodName, String parameters) throws MethodExistException {
+    static SuperBlock declareMethod(String methodName, String parameters) throws ObjectExistException {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         if (found == null) {
             SuperBlock newMethod = BlockFactory.produceBlock(methodName, parameters);
         } else {
-            throw new MethodExistException("Trying to create a method that already exist");
+            throw new ObjectExistException("Trying to create a method that already exist");
         }
         return null;
     }

@@ -3,11 +3,10 @@ package oop.ex6.expressions;
 import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
-import oop.ex6.sjava_objects.blocks.IfBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
-import oop.ex6.sjava_objects.variables.IntVar;
+import oop.ex6.sjava_objects.variables.Type;
+import oop.ex6.sjava_objects.variables.VarFactory;
 
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,12 +15,6 @@ import java.util.regex.Pattern;
  * @author Omri Kaplan & Asaf Etzion
  */
 public class ExpressionsDefiner {
-
-
-    /* Data Members */
-
-
-
     /* Methods */
 
     /**
@@ -37,7 +30,7 @@ public class ExpressionsDefiner {
         final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
         final String NUMBERS = "-?\\d+(\\.\\d+)?";
         final String VARIABLE_VALUE = "(true|false|\".*\"|'.'|" + NUMBERS + "|" + VARIABLE_NAME + ")";
-        final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "(" + VARIABLE_NAME + "(\\s*=\\s*" + VARIABLE_VALUE +
+        final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "((" + VARIABLE_NAME + ")(\\s*=\\s*" + VARIABLE_VALUE +
                 "\\s*)?)";
         final String LOOP_AND_CONDITION = "(if|while)";
         final String BOOLEAN_VARIABLE = "(" + NUMBERS + "|true|false|" + VARIABLE_NAME + ")";
@@ -45,19 +38,19 @@ public class ExpressionsDefiner {
         final String IF_OR_WHILE_PARAMETER = "(" + BOOLEAN_VARIABLE + "|" + BOOLEAN_OPERATOR + ")";
 
 
-        final String IF_WHILE_DECLARATION = "\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
-                "\\s*\\)\\s*\\{\\s*";
+        final String IF_WHILE_DECLARATION = "\\A\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
+                "\\s*\\)\\s*\\{\\s*\\z";
 
-        final String METHOD_DECLARATION = "\\s*void\\s+" + METHOD_NAME + "\\s*\\(\\s*(((\\s*" + PARAMETER +
-                "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*";
+        final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
+                "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*\\z";
 
-        final String VARIABLE_DECLARATION = "\\s*" + VARIABLE_TYPE + "\\s+" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
-                "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*\\s*;\\s*";
+        final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
+                "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*\\s*;\\s*\\z";
 
-        final String CALL_METHOD = "\\s*" + METHOD_NAME + "\\s*\\(\\s*((" + VARIABLE_VALUE + "(\\s*,\\s*" +
-                VARIABLE_VALUE + "\\s*)*" + ")|)\\)\\s*;\\s*";
+        final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE + "(\\s*,\\s*" +
+                VARIABLE_VALUE + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
 
-        final String ASSIGN_VARIABLE = "\\s*" + VARIABLE_NAME + "\\s*=\\s*" + VARIABLE_VALUE + "\\s*;\\s*";
+        final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE + "\\s*;\\s*\\z";
 
         Matcher ifWhileDeclaration = Pattern.compile(IF_WHILE_DECLARATION).matcher(expression);
         Matcher methodDeclaration = Pattern.compile(METHOD_DECLARATION).matcher(expression);
@@ -65,34 +58,62 @@ public class ExpressionsDefiner {
         Matcher variableDeclaration = Pattern.compile(VARIABLE_DECLARATION).matcher(expression);
         Matcher assignVariable = Pattern.compile(ASSIGN_VARIABLE).matcher(expression);
 
-        // todo return null if object was found and no exception raised (calling a method, var assignment...).
-        // todo subtract reserved words with regex!
-
         if (ifWhileDeclaration.matches()) {
             if (currentBlock.getParent()==null) { //meaning this is the main block
-                throw new WrongProtocolDeclaration("can't declare a loop in the main lock");
+                throw new WrongProtocolDeclaration("can't declare a loop in the main block");
             } else {
-                return BlockFactory.produceBlock(new String[]{"ifWhile",ifWhileDeclaration.group(2)});
+                SuperBlock loopBlock = BlockFactory.produceBlock("ifWhile", ifWhileDeclaration.group(2)); //todo change to ifwhileblock
+                loopBlock.setParent(currentBlock);
+                return loopBlock;
             }
         } else if (methodDeclaration.matches()) {
+            isReservedWordErrorCheck(methodDeclaration.group(1)); //todo add final support
             if (currentBlock.getParent()==null) { //meaning this is the main block
-
+                return Finder.declareMethod(methodDeclaration.group(1),methodDeclaration.group(2));
             } else {
                 throw new WrongProtocolDeclaration("can't declare a method in an inner block");
             }
         } else if (callMethod.matches()){
+            isReservedWordErrorCheck(callMethod.group(1));
             if (currentBlock.getParent()==null) { //meaning this is the main block
-
+                throw new WrongProtocolDeclaration("can't call a method in the main block");
             } else {
-
+                Finder.callMethod(callMethod.group(1),callMethod.group(2));
+                return null;
             }
         } else if (variableDeclaration.matches()){
 
+            //todo add a more complex code for multiple vars
+
+            isReservedWordErrorCheck(variableDeclaration.group(/*todo*/));
+            if (Finder.declareVar(variableDeclaration.group(/*todo*/), currentBlock)){
+                return VarFactory.produceVariable(new String[]{variableDeclaration.group(/*todo final+type*/),variableDeclaration.group(/*todo name*/),
+                        variableDeclaration.group(/*todo*/)});
+            } else {
+                throw new ObjectExistException("a variable with the same name already exists in the relevant scope");
+            }
         } else if (assignVariable.matches()){
-
+            isReservedWordErrorCheck(assignVariable.group(1));
+            Type varType = Finder.assignVar(assignVariable.group(1), currentBlock);
+                    //equals(assignVariable.group(/*todo type*/))){ //todo add option for accepting int into double!!
+                    // if the assign is var-run assignVar on it, if it is a value
+            if (){
+            return null;
+            } else {
+                throw new WrongParameterTypeException("a different type of variable was expected as a parameter");
+            }
+        } else {
+            throw new SyntaxErrorException("the syntax doesn't follow the sjava protocol");
         }
-
         return null;//todo change
+    }
+
+    private static void isReservedWordErrorCheck(String word) throws SyntaxErrorException {
+        final String RESERVED_WORDS = "int|double|boolean|char|String|void|final|if|while|true|false|return";
+        if (word.trim().matches(RESERVED_WORDS)){
+            throw new SyntaxErrorException("using the reserved words of sjava as a method or variable name accounts " +
+                    "as a syntax error");
+        }
     }
 
     /**
