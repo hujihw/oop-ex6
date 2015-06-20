@@ -25,5 +25,5 @@ public class OmriExpDef {
     final String COMMA_METHOD_PARAMETER = "(" + METHOD_PARAMETER + "\\s*,\\s*)*";
 
     final String CALL_METHOD = "\\s*" + METHOD_NAME + "\\s*\\(\\s*((" + COMMA_METHOD_PARAMETER + METHOD_PARAMETER + ")|)\\)\\s*;\\s*";
-    final String ASSIGN_VARIABLE = ""; // todo
+    final String ASSIGN_VARIABLE = "\\s*" + VARIABLE_NAME + "\\s*=\\s*" + VARIABLE_VALUE + "\\s*;\\s*";
 }
