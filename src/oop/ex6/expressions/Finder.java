@@ -2,7 +2,6 @@ package oop.ex6.expressions;
 
 import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
-import oop.ex6.sjava_objects.blocks.IllegalBlockException;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
 import oop.ex6.sjava_objects.variables.SuperVar;
@@ -19,18 +18,15 @@ class Finder {
     /**
      * Search for a method in the root block of the abstract compile tree.
      * @param methodName    The name of the method to find.
-     * @throws ObjectDoesNotExistException If the method was not found or given wrong parameters.
+     * @return true if the object was found, false else.
      */
-    static void callMethod(String methodName, String parameters) throws ObjectDoesNotExistException {
+    static boolean callMethod(String methodName, String parameters) {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         //noinspection SimplifiableIfStatement
         if (found != null) {
-            if (!found.checkParameters(parameters)) {
-                throw new ObjectDoesNotExistException("Could not find that method, or wrong parameters " +
-                         "given");
-            }
+            return found.checkParameters(parameters);
         } else {
-            throw new ObjectDoesNotExistException("Could not find that method, or wrong parameters given");
+            return false;
         }
     }
 
@@ -38,9 +34,9 @@ class Finder {
      * Look for the method in the methods hash table. If it does not exist, create it.
      * @param methodName    The method we want to declare.
      * @param parameters    The parameters of the method.
-     * @return The new method block object if it was not exist, or {@code null} if it was.
+     * @return The new method block object if it was not exist, or null if it was.
      */
-    static SuperBlock declareMethod(String methodName, String parameters) throws ObjectExistException, IllegalBlockException {
+    static SuperBlock declareMethod(String methodName, String parameters) throws ObjectExistException {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         if (found == null) {
             SuperBlock newMethod = BlockFactory.produceBlock(methodName, parameters);
@@ -83,7 +79,7 @@ class Finder {
      * place.
      * @param varName         The name of the variable we want to declare.
      * @param currentBlock    The current block object we want to declare the variable in.
-     * @return true if the variable does not exist, false otherwise.
+     * @return The variable Type (if it was found) or null else.
      */
     static boolean declareVar(String varName, SuperBlock currentBlock) { // todo decide return value.
         return currentBlock.getVariable(varName) == null;
