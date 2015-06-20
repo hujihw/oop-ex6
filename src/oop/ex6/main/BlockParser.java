@@ -74,11 +74,17 @@ class BlockParser {
         }
     }
 
-    private void varOrBlockHandle(SuperBlock theBlock, SJavaObject theObject) {
+    /**
+     * Verifying the type of SJava object that was created.
+     * @param currentBlock    The block we currently parse.
+     * @param theObject       The given SJava object.
+     */
+    private void varOrBlockHandle(SuperBlock currentBlock, SJavaObject theObject) {
         if (theObject instanceof SuperBlock) {
+            ((SuperBlock) theObject).setParent(currentBlock);
             parseBlock((SuperBlock) theObject); // todo consider generics, not down casting.
         } else if (theObject instanceof SuperVar) {
-            theBlock.addVariable(theObject.getName(), (SuperVar) theObject);
+            currentBlock.addVariable(theObject.getName(), (SuperVar) theObject);
         }
     }
 }

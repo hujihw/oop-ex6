@@ -10,7 +10,7 @@ public class BlockFactory {
      * @param parameters
      * @return
      */
-    public static SuperBlock produceBlock(String[] parameters) {
+    public static SuperBlock produceBlock(String name, String parameters) {
 
         return null;
     }

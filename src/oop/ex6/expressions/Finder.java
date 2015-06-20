@@ -37,11 +37,12 @@ class Finder {
      * @param parameters    The parameters of the method.
      * @return The new method block object if it was not exist, or null if it was.
      */
-    static SuperBlock declareMethod(String methodName, String parameters) {
+    static SuperBlock declareMethod(String methodName, String parameters) throws MethodExistException {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         if (found == null) {
-            String[] nameAndParameters = {methodName, parameters};
-            SuperBlock newMethod = BlockFactory.produceBlock(nameAndParameters);
+            SuperBlock newMethod = BlockFactory.produceBlock(methodName, parameters);
+        } else {
+            throw new MethodExistException("Trying to create a method that already exist");
         }
         return null;
     }
@@ -68,7 +69,7 @@ class Finder {
             currentBlock.addVariable(varName, copiedVar);
             return found.getType();
         } else {
-            return null;
+            throw new ObjectDoesNotExistException("The variable does not exist");
         }
     }
 
@@ -81,12 +82,7 @@ class Finder {
      * @param currentBlock    The current block object we want to declare the variable in.
      * @return The variable Type (if it was found) or null else.
      */
-    static Type declareVar(String varName, SuperBlock currentBlock) { // todo decide return value.
-        SuperVar found = currentBlock.getVariable(varName);
-        if (found != null) {
-            return found.getType();
-        } else {
-            return null;
-        }
+    static boolean declareVar(String varName, SuperBlock currentBlock) { // todo decide return value.
+        return currentBlock.getVariable(varName) == null;
     }
 }
