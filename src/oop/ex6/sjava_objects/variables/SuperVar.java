@@ -5,7 +5,7 @@ import oop.ex6.sjava_objects.SJavaObject;
 /**
  * @author Omri Kaplan
  */
-public abstract class SuperVar extends SJavaObject{
+public class SuperVar extends SJavaObject{
 
     /* Data Members */
     private boolean isFinal = false;
@@ -13,6 +13,11 @@ public abstract class SuperVar extends SJavaObject{
     private Type type;
 
     /* Constructors */
+    public SuperVar(SuperVar superVar) {
+        this.isFinal = superVar.isFinal();
+        this.wasInitialized = superVar.isWasInitialized();
+        this.type = superVar.getType();
+    }
 
     /* Methods */
 
