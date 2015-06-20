@@ -1,5 +1,6 @@
 package oop.ex6.sjava_objects.blocks;
 
+import oop.ex6.main.Manager;
 import java.util.Scanner;
 
 /**
@@ -11,8 +12,9 @@ public class MethodBlock extends SuperBlock {
     private Scanner scanner;
     // todo array of parameter types ordered as the method declaration order.
 
-    public MethodBlock(MainBlock parent) { //todo check MainBlock is ok (was SuperBlock)
-        super(parent);
+    public MethodBlock(String parameters) { //todo check MainBlock is ok (was SuperBlock)
+        super(Manager.getInstance().getMainBlock());
+        System.out.println("Method created!");
     }
 
     /**

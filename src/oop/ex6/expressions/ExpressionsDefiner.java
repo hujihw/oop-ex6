@@ -3,11 +3,8 @@ package oop.ex6.expressions;
 import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
-import oop.ex6.sjava_objects.blocks.IfBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
-import oop.ex6.sjava_objects.variables.IntVar;
 
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
