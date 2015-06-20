@@ -38,19 +38,19 @@ public class ExpressionsDefiner {
         final String IF_OR_WHILE_PARAMETER = "(" + BOOLEAN_VARIABLE + "|" + BOOLEAN_OPERATOR + ")";
 
 
-        final String IF_WHILE_DECLARATION = "\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
-                "\\s*\\)\\s*\\{\\s*";
+        final String IF_WHILE_DECLARATION = "\\A\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
+                "\\s*\\)\\s*\\{\\s*\\z";
 
-        final String METHOD_DECLARATION = "\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
-                "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*";
+        final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
+                "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*\\z";
 
-        final String VARIABLE_DECLARATION = "\\s*" + VARIABLE_TYPE + "\\s+" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
-                "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*\\s*;\\s*";
+        final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
+                "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*\\s*;\\s*\\z";
 
-        final String CALL_METHOD = "\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE + "(\\s*,\\s*" +
-                VARIABLE_VALUE + "\\s*)*" + ")|)\\)\\s*;\\s*";
+        final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE + "(\\s*,\\s*" +
+                VARIABLE_VALUE + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
 
-        final String ASSIGN_VARIABLE = "\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE + "\\s*;\\s*";
+        final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE + "\\s*;\\s*\\z";
 
         Matcher ifWhileDeclaration = Pattern.compile(IF_WHILE_DECLARATION).matcher(expression);
         Matcher methodDeclaration = Pattern.compile(METHOD_DECLARATION).matcher(expression);
@@ -58,7 +58,6 @@ public class ExpressionsDefiner {
         Matcher variableDeclaration = Pattern.compile(VARIABLE_DECLARATION).matcher(expression);
         Matcher assignVariable = Pattern.compile(ASSIGN_VARIABLE).matcher(expression);
 
-        // todo add ^()$ to all regex and ++ all of the groups!
         if (ifWhileDeclaration.matches()) {
             if (currentBlock.getParent()==null) { //meaning this is the main block
                 throw new WrongProtocolDeclaration("can't declare a loop in the main block");
@@ -68,7 +67,7 @@ public class ExpressionsDefiner {
                 return loopBlock;
             }
         } else if (methodDeclaration.matches()) {
-            isReservedWordErrorCheck(methodDeclaration.group(1));
+            isReservedWordErrorCheck(methodDeclaration.group(1)); //todo add final support
             if (currentBlock.getParent()==null) { //meaning this is the main block
                 return Finder.declareMethod(methodDeclaration.group(1),methodDeclaration.group(2));
             } else {
@@ -88,12 +87,13 @@ public class ExpressionsDefiner {
 
             isReservedWordErrorCheck(variableDeclaration.group(/*todo*/));
             if (Finder.declareVar(variableDeclaration.group(/*todo*/), currentBlock)){
-                return VarFactory.produceVariable(new String[]{variableDeclaration.group(/*todo*/),
-                        variableDeclaration.group(/*todo*/)});
+                return VarFactory.produceVariable(new String[]{variableDeclaration.group(/*todo final+type*/),variableDeclaration.group(/*todo name*/),
+                        variableDeclaration.group(/*todo value or var*/)});
             } else {
                 throw new ObjectExistException("a variable with the same name already exists in the relevant scope");
             }
         } else if (assignVariable.matches()){
+            //todo cut out to method!
             isReservedWordErrorCheck(assignVariable.group(1));
             Type varType = Finder.assignVar(assignVariable.group(1), currentBlock);
                     //equals(assignVariable.group(/*todo type*/))){ //todo add option for accepting int into double!!
