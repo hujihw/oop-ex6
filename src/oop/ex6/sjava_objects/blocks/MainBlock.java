@@ -13,8 +13,8 @@ public class MainBlock extends SuperBlock {
     private Hashtable<String, MethodBlock> methods;
 
     /* Constructors */
-    public MainBlock(SuperBlock parent) {
-        super(parent);
+    public MainBlock() {
+        super(null);
     }
 
     /* methods */
