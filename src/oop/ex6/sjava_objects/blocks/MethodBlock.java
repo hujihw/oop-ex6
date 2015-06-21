@@ -59,7 +59,7 @@ public class MethodBlock extends SuperBlock {
         if (givenParameters.length == this.parameterTypes.length){
             for (int i = 0; i < givenParameters.length; i++) {
                 if (givenParameters[i].matches(VAR_NAME)){
-                    if(!this.parameterTypes[i].compareType(Finder.assignVar(givenParameters[i], this))) {
+                    if(!this.parameterTypes[i].compareType(Finder.assignVar(givenParameters[i], this).getType())) {
                         throw new WrongParametersException("Called method with variable of a wrong type");
                     }
                 } else {

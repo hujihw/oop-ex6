@@ -46,11 +46,10 @@ public class Finder {
      * @param varName    The name of the variable to find.
      * @return the Type of the variable if it was found, or null if it was not found.
      */
-    public static Type assignVar(String varName, SuperBlock currentBlock) throws ObjectDoesNotExistException{
+    public static SuperVar assignVar(String varName, SuperBlock currentBlock) throws ObjectDoesNotExistException{
         SuperVar found = currentBlock.getVariable(varName);
         if (found != null) {
-            found.setWasInitialized(true);
-            return found.getType();
+            return found;
         } else {
             SuperBlock currentParent = currentBlock;
             while (currentBlock.getParent() != null) {
@@ -58,9 +57,8 @@ public class Finder {
                 found = currentParent.getVariable(varName);
                 if (found != null) {
                     SuperVar copiedVar = new SuperVar(found);
-                    copiedVar.setWasInitialized(true);
                     currentBlock.addVariable(varName, copiedVar);
-                    return found.getType();
+                    return copiedVar;
                 }
             }
         }
