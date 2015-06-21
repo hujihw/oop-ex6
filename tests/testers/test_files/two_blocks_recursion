@@ -1,7 +1,15 @@
 // comment
 
+
+
 void foo() {
+return;
     if(true) {
+    return;
+        while(false){
+        return;
+        }
+        return;
     }
 return;
 }

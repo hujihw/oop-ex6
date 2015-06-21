@@ -18,44 +18,54 @@ import java.util.regex.Pattern;
 public class ExpressionsDefiner {
 
     /* data members */
-    private static SuperBlock currentBlock;
+    private static ExpressionsDefiner instance = new ExpressionsDefiner();
+    private SuperBlock currentBlock;
+
+    final String METHOD_NAME = "[a-zA-Z]\\w*";
+    final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
+    final String VARIABLE_TYPE = "(final\\s+)?\\s*(int|double|String|boolean|char)";
+    final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
+    final String NUMBERS = "-?\\d+(\\.\\d+)?";
+    final String VARIABLE_VALUE_OR_NAME = "(true|false|\".*\"|'.'|" + NUMBERS + "|" + VARIABLE_NAME + ")";
+    final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "((" + VARIABLE_NAME + ")(\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
+            "\\s*)?)";
+    final String LOOP_AND_CONDITION = "(if|while)";
+    final String BOOLEAN_VARIABLE = "(" + NUMBERS + "|true|false|" + VARIABLE_NAME + ")";
+    final String BOOLEAN_OPERATOR = "((" + BOOLEAN_VARIABLE + "\\s*(&&|\\|\\|)\\s*)+" + BOOLEAN_VARIABLE + ")";
+    final String IF_OR_WHILE_PARAMETER = "(" + BOOLEAN_VARIABLE + "|" + BOOLEAN_OPERATOR + ")";
+
+    final String IF_WHILE_DECLARATION = "\\A\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
+            "\\s*\\)\\s*\\{\\s*\\z";
+
+    final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
+            "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*\\z";
+
+    final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+(" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
+            "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*)\\s*;\\s*\\z";
+
+    final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE_OR_NAME + "(\\s*,\\s*" +
+            VARIABLE_VALUE_OR_NAME + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
+
+    final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME + "\\s*;\\s*\\z";
 
     /* Methods */
 
     /**
+     * The ExpressionsDefiner instance getter.
+     * @return The only manager instance.
+     */
+    public static ExpressionsDefiner getInstance() {
+        return instance;
+    }
+
+    /**
      * Define an S-Java expression, and do the appropriate task.
      * @param expression    The expression we want to define.
+     * @param theCurrentBlock the block in which the expression was given
      * @return The object corresponding with the expression.
+     * @throws SJavaException throws any SJavaException onwards.
      */
-    public static SJavaObject[] defineExpression(String expression, SuperBlock theCurrentBlock) throws SJavaException{ //todo decide whether to make singleton and take all of the strings out or make enum (or both?)
-
-        final String METHOD_NAME = "[a-zA-Z]\\w*";
-        final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
-        final String VARIABLE_TYPE = "(final\\s+)?\\s*(int|double|String|boolean|char)";
-        final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
-        final String NUMBERS = "-?\\d+(\\.\\d+)?";
-        final String VARIABLE_VALUE_OR_NAME = "(true|false|\".*\"|'.'|" + NUMBERS + "|" + VARIABLE_NAME + ")";
-        final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "((" + VARIABLE_NAME + ")(\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
-                "\\s*)?)";
-        final String LOOP_AND_CONDITION = "(if|while)";
-        final String BOOLEAN_VARIABLE = "(" + NUMBERS + "|true|false|" + VARIABLE_NAME + ")";
-        final String BOOLEAN_OPERATOR = "((" + BOOLEAN_VARIABLE + "\\s*(&&|\\|\\|)\\s*)+" + BOOLEAN_VARIABLE + ")";
-        final String IF_OR_WHILE_PARAMETER = "(" + BOOLEAN_VARIABLE + "|" + BOOLEAN_OPERATOR + ")";
-
-
-        final String IF_WHILE_DECLARATION = "\\A\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
-                "\\s*\\)\\s*\\{\\s*\\z";
-
-        final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
-                "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*\\z";
-
-        final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+(" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
-                "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*)\\s*;\\s*\\z";
-
-        final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE_OR_NAME + "(\\s*,\\s*" +
-                VARIABLE_VALUE_OR_NAME + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
-
-        final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME + "\\s*;\\s*\\z";
+    public SJavaObject[] defineExpression(String expression, SuperBlock theCurrentBlock) throws SJavaException{
 
         Matcher ifWhileDeclaration = Pattern.compile(IF_WHILE_DECLARATION).matcher(expression);
         Matcher methodDeclaration = Pattern.compile(METHOD_DECLARATION).matcher(expression);
@@ -97,34 +107,7 @@ public class ExpressionsDefiner {
             String varType = variableDeclaration.group(1)+variableDeclaration.group(2); // final+type
             final String commaWithSpaces = "\\s*,\\s*";
             String[] variablesAndAssignment = variableDeclaration.group(3).trim().split(commaWithSpaces);
-            SJavaObject[] variablesToReturn = new SJavaObject[variablesAndAssignment.length];
-            final String variableAndAssignmentRegEx = "\\A(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
-                    "\\z";
-            Pattern variableAndAssignmentPattern = Pattern.compile(variableAndAssignmentRegEx);
-            int i = 0;
-            for (String varAndAssignment: variablesAndAssignment){
-                String varName, assignValue = null;
-                Matcher varAndAssignmentMatcher = variableAndAssignmentPattern.matcher(varAndAssignment);
-                if (varAndAssignmentMatcher.matches()){
-                    varName = varAndAssignmentMatcher.group(1);
-                    assignValue = varAndAssignmentMatcher.group(2);
-                } else {
-                    varName = varAndAssignment.trim();
-                }
-                isReservedWordErrorCheck(varName);
-                if (Finder.declareVar(varName, currentBlock)) {
-                    SuperVar variable = VarFactory.produceVariable(new String[]{varType, varName});
-                    if (assignValue != null){
-                        assignVariableMethod(varName, assignValue);
-                    }
-                    variablesToReturn[i] = variable; //todo: its ok- because of the empty var factory
-                } else {
-                    throw new ObjectExistException("a variable with the same name already exists in the relevant " +
-                            "scope");
-                }
-                i++;
-            }
-            return variablesToReturn;
+            return variablesDeclarationMethod(varType, variablesAndAssignment);
 
         } else if (assignVariable.matches()){
             assignVariableMethod(assignVariable.group(1), assignVariable.group(2));
@@ -134,7 +117,52 @@ public class ExpressionsDefiner {
         }
     }
 
-    private static void assignVariableMethod(String varName, String value) throws SJavaException{
+    /**
+     * declares all of the variables in the current expression, assigns the variable if needed.
+     * @param varType the type of all of the declared variables. can have final prefix.
+     * @param variablesAndAssignment the string that includes all of the variable names and assignments.
+     * @return an array of the variables created.
+     * @throws SJavaException throws any SJavaException onwards.
+     */
+    private SJavaObject[] variablesDeclarationMethod(String varType, String[] variablesAndAssignment) throws
+            SJavaException{
+        SJavaObject[] variablesToReturn = new SJavaObject[variablesAndAssignment.length];
+        final String variableAndAssignmentRegEx = "\\A(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
+                "\\z";
+        Pattern variableAndAssignmentPattern = Pattern.compile(variableAndAssignmentRegEx);
+        int i = 0;
+        for (String varAndAssignment: variablesAndAssignment){
+            String varName, assignValue = null;
+            Matcher varAndAssignmentMatcher = variableAndAssignmentPattern.matcher(varAndAssignment);
+            if (varAndAssignmentMatcher.matches()){
+                varName = varAndAssignmentMatcher.group(1);
+                assignValue = varAndAssignmentMatcher.group(2);
+            } else {
+                varName = varAndAssignment.trim();
+            }
+            isReservedWordErrorCheck(varName);
+            if (Finder.declareVar(varName, currentBlock)) {
+                SuperVar variable = VarFactory.produceVariable(new String[]{varType, varName});
+                if (assignValue != null){
+                    assignVariableMethod(varName, assignValue);
+                }
+                variablesToReturn[i] = variable;
+            } else {
+                throw new ObjectExistException("a variable with the same name already exists in the relevant " +
+                        "scope");
+            }
+            i++;
+        }
+        return variablesToReturn;
+    }
+
+    /**
+     * assigns a single variable.
+     * @param varName the name of the variable
+     * @param value the value to assign
+     * @throws SJavaException throws any SJavaException onwards
+     */
+    private void assignVariableMethod(String varName, String value) throws SJavaException{
         Type valueType = Finder.assignVar(value, currentBlock);
         Type varType = Finder.assignVar(varName, currentBlock);
         if (varType.isValid(value) || varType.compareType(valueType) ||
@@ -145,7 +173,12 @@ public class ExpressionsDefiner {
         }
     }
 
-    private static void isReservedWordErrorCheck(String word) throws SyntaxErrorException {
+    /**
+     * checks if the method or variable name is a reserved sjava word
+     * @param word the word to check
+     * @throws SyntaxErrorException throws any SJavaException onwards.
+     */
+    private void isReservedWordErrorCheck(String word) throws SyntaxErrorException {
         final String RESERVED_WORDS = "int|double|boolean|char|String|void|final|if|while|true|false|return";
         if (word.trim().matches(RESERVED_WORDS)){
             throw new SyntaxErrorException("using the reserved words of sjava as a method or variable name accounts " +

@@ -98,7 +98,7 @@ class MainParser {
 
         Pattern p = Pattern.compile("^//.*|\\s*");
         if (!p.matcher(line).matches()){ //negates the pattern to filter empty lines and line comments
-            return ExpressionsDefiner.defineExpression(line, currentBlock);
+            return ExpressionsDefiner.getInstance().defineExpression(line, currentBlock);
         } else return null;
     }
 }
