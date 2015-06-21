@@ -1,6 +1,5 @@
 package oop.ex6.main;
 
-import oop.ex6.expressions.ExpressionsDefiner;
 import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
@@ -67,7 +66,7 @@ class BlockParser {
                 return;
             }
             // send to Expressions to turn the line into
-            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line, block);
+            SJavaObject[] expressionObject = MainParser.commentsAndEmptyLinesFilter(line, block);
             if (expressionObject != null) {
                 varOrBlockHandle(block, expressionObject);
             }
@@ -77,14 +76,16 @@ class BlockParser {
     /**
      * Verifying the type of SJava object that was created.
      * @param currentBlock    The block we currently parse.
-     * @param theObject       The given SJava object.
+     * @param theObjects       The given SJava object.
      */
-    private void varOrBlockHandle(SuperBlock currentBlock, SJavaObject theObject) throws SJavaException{
-        if (theObject instanceof SuperBlock) {
-            ((SuperBlock) theObject).setParent(currentBlock);
-            parseBlock((SuperBlock) theObject); // todo consider generics, not down casting.
-        } else if (theObject instanceof SuperVar) {
-            currentBlock.addVariable(theObject.getName(), (SuperVar) theObject);
+    private void varOrBlockHandle(SuperBlock currentBlock, SJavaObject[] theObjects) throws SJavaException{
+        if (theObjects[0] instanceof SuperBlock) {
+            ((SuperBlock) theObjects[0]).setParent(currentBlock);
+            parseBlock((SuperBlock) theObjects[0]); // todo consider generics, not down casting.
+        } else if (theObjects[0] instanceof SuperVar) {
+            for (int i = 0; i < theObjects.length; i++) {
+                currentBlock.addVariable(theObjects[i].getName(), (SuperVar) theObjects[i]);
+            }
         }
     }
 }

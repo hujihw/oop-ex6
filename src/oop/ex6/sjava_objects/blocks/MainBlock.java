@@ -15,6 +15,7 @@ public class MainBlock extends SuperBlock {
     /* Constructors */
     public MainBlock() {
         super(null);
+        methods = new Hashtable<>();
     }
 
     /* methods */
