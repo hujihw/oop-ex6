@@ -1,9 +1,6 @@
 void foo() {
-first line in the method;
     if() {
-    first "if" block;
         while() {
-            the "while" block;
         }
     }
 return;
