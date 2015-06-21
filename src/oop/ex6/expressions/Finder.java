@@ -77,7 +77,7 @@ public class Finder {
      * @param currentBlock    The current block object we want to declare the variable in.
      * @return The variable Type (if it was found) or null else.
      */
-    static boolean declareVar(String varName, SuperBlock currentBlock) {
+    public static boolean declareVar(String varName, SuperBlock currentBlock) {
         return currentBlock.getVariable(varName) == null;
     }
 }
