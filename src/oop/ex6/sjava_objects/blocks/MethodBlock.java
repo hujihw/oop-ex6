@@ -40,8 +40,8 @@ public class MethodBlock extends SuperBlock {
             String parameter = parametersArray[i];
             String[] typeAndName = parameter.split("\\s+");
             if (Finder.declareVar(typeAndName[1], this)) {
-                addVariable(typeAndName[1], VarFactory.produceVariable(typeAndName));
-                this.parameterTypes[i] = this.getVariable(typeAndName[1]).getType();
+                addVariable(typeAndName[typeAndName.length - 1], VarFactory.produceVariable(typeAndName));
+                this.parameterTypes[i] = this.getVariable(typeAndName[typeAndName.length - 1]).getType();
             } else {
                 throw new VariableAlreadyExistException("Trying to declare an existing local variable.");
             }

@@ -3,20 +3,16 @@ package oop.ex6.sjava_objects.variables;
 /**
  * @author Omri Kaplan
  */
-public class FinalDecorator extends SuperVar { // todo
+public class FinalDecorator extends SuperVar {
 
     /* Data Member */
     SuperVar variable;
-    String name;
 
     /* Constructor */
-//    FinalDecorator(String[] varDeclaration) { // todo comment out this for compilation
-//        variable = VarFactory.produceVariable(varDeclaration); // todo comment out this for compilation
-//        setIsFinal(true); // todo comment out for compilation
-//    }
-
-    public FinalDecorator(SuperVar superVar) { // todo wrote this for compilation
-        super(superVar);
+    FinalDecorator(String[] varDeclaration) throws IllegalVarException { // todo update initialized?
+        super(varDeclaration[1]);
+        this.variable = VarFactory.produceVariable(varDeclaration);
+        setIsFinal(true);
     }
 
     /* Methods */
@@ -24,4 +20,35 @@ public class FinalDecorator extends SuperVar { // todo
     public Type getType() {
         return variable.getType();
     }
+
+    @Override
+    public void setType(Type type) {
+        variable.setType(type);
+    }
+
+    @Override
+    public boolean isFinal() {
+        return variable.isFinal();
+    }
+
+    @Override
+    public void setIsFinal(boolean isFinal) {
+        variable.setIsFinal(isFinal);
+    }
+
+    @Override
+    public boolean wasInitialized() {
+        return variable.wasInitialized();
+    }
+
+    @Override
+    public void setWasInitialized() {
+        variable.setWasInitialized();
+    }
+
+    @Override
+    public String getName() {
+        return variable.getName();
+    }
+
 }

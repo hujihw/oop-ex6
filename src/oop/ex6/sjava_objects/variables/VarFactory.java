@@ -1,5 +1,7 @@
 package oop.ex6.sjava_objects.variables;
 
+import java.util.Arrays;
+
 /**
  * @author Omri Kaplan
  */
@@ -16,8 +18,10 @@ public class VarFactory {
                 return new IntVar(typeAndName[1]);
             case "String":
                 return new StringVar(typeAndName[1]);
+            case "final":
+                return new FinalDecorator(Arrays.copyOfRange(typeAndName, 1, typeAndName.length));
             default:
-                throw new IllegalVarException("Trying to create a variable of an un recognized type");
+                throw new IllegalVarException("Trying to create a variable of an unrecognized type");
         }
     }
 }
