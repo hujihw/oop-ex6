@@ -57,7 +57,7 @@ public class SuperVar extends SJavaObject{
         return wasInitialized;
     }
 
-    public void setWasInitialized(boolean wasInitialized) {
-        this.wasInitialized = wasInitialized;
+    public void setWasInitialized() {
+        this.wasInitialized = true;
     }
 }
