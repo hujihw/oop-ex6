@@ -84,12 +84,12 @@ public class ExpressionsDefiner {
             } else {
                 SuperBlock loopBlock = BlockFactory.produceBlock("ifWhile", ifWhileDeclaration.group(2));
                 if (loopBlock != null) {
-                    loopBlock.setParent(currentBlock); //todo check
+                    loopBlock.setParent(currentBlock);
                 }
                 return new SJavaObject[]{loopBlock};
             }
         } else if (methodDeclaration.matches()) {
-            isReservedWordErrorCheck(methodDeclaration.group(1)); //todo add final support
+            isReservedWordErrorCheck(methodDeclaration.group(1));
             if (currentBlock.getParent()==null) { //meaning this is the main block
                 return new SJavaObject[]{Finder.declareMethod(methodDeclaration.group(1),methodDeclaration.group(2))};
             } else {
@@ -173,12 +173,14 @@ public class ExpressionsDefiner {
         if (varType.isValid(value)){
             return;
         }
-        Type valueType = Finder.assignVar(value, currentBlock).getType();
-        if (varType.compareType(valueType)||(varType.getType().equals("double") && valueType.getType().equals("int"))){
-            return; // for readability
-        } else {
-            throw new WrongParameterTypeException("a different type of value was expected as a parameter");
+        if (value.matches(VARIABLE_NAME)) {
+            Type valueType = Finder.assignVar(value, currentBlock).getType();
+            if (varType.compareType(valueType) ||
+                    (varType.getType().equals("double") && valueType.getType().equals("int"))) {
+                return; // for readability
+            }
         }
+        throw new WrongParameterTypeException("a different type of value was expected as a parameter");
     }
 
     /**
