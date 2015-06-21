@@ -52,18 +52,17 @@ public class Finder {
             return found;
         } else {
             SuperBlock currentParent = currentBlock;
-            while (currentBlock.getParent() != null) {
+            while (currentParent.getParent() != null) {
                 currentParent = currentParent.getParent();
-                if (currentParent != null) {
-                    found = currentParent.getVariable(varName);
-                    if (found != null) {
-                        SuperVar copiedVar = new SuperVar(found);
-                        currentBlock.addVariable(varName, copiedVar);
-                        return copiedVar;
-                    }
+                found = currentParent.getVariable(varName);
+                if (found != null) {
+                    SuperVar copiedVar = new SuperVar(found);
+                    currentBlock.addVariable(varName, copiedVar);
+                    return copiedVar;
                 }
             }
         }
+
         throw new ObjectDoesNotExistException("The variable does not exist");
     }
 
@@ -71,7 +70,7 @@ public class Finder {
         SuperVar found = currentBlock.getVariable(varName);
         if (found != null) {
             if (checkInitialization(found, currentBlock)){
-
+                return found.getType();
             }
         } else {
             SuperBlock currentParent = currentBlock;
@@ -79,9 +78,7 @@ public class Finder {
                 currentParent = currentParent.getParent();
                 found = currentParent.getVariable(varName);
                 if (found != null) {
-                    SuperVar copiedVar = new SuperVar(found);
-                    currentBlock.addVariable(varName, copiedVar);
-                    //return copiedVar;
+
                 }
 
             }
@@ -89,7 +86,12 @@ public class Finder {
         return null; //todo remove
     }
 
-
+    /**
+     *
+     * @param variable
+     * @param currentBlock
+     * @return
+     */
     private static boolean checkInitialization(SuperVar variable, SuperBlock currentBlock){
         if (currentBlock.getParent() != null){ // this is a local variable
             if (variable.wasInitialized()){
