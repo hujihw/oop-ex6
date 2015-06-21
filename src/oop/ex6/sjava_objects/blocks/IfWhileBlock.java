@@ -23,7 +23,7 @@ public class IfWhileBlock extends SuperBlock {
             if (parameter.matches(TRUE_FALSE)) {
                 continue;
             } else if (parameter.matches(VARIABLE_NAME)) {
-                Type parameterType = Finder.assignVar(parameter, this).getType();
+                Type parameterType = Finder.wasVarInitialized(parameter, this);
                 if (!(parameterType.compareType(Type.BOOLEAN))) {
                     throw new WrongParametersException("Trying to initialize an If/While block with the wrong " +
                             "parameters");
