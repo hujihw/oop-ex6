@@ -25,6 +25,7 @@ public abstract class SuperBlock extends SJavaObject {
     public SuperBlock(String name, SuperBlock parent) {
         super(name);
         this.parent = parent;
+        variables = new Hashtable<>();
     }
 
     /* methods */
