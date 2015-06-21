@@ -1,8 +1,8 @@
 // comment
-final int a;
+int a;
 void foo() {
     if(true) {
-        boolean b;
+        a = 5;
         while(true) {
             if(false) {
 
