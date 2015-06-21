@@ -40,11 +40,10 @@ class Finder {
     static SuperBlock declareMethod(String methodName, String parameters) throws ObjectExistException, IllegalBlockException {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         if (found == null) {
-            SuperBlock newMethod = BlockFactory.produceBlock(methodName, parameters);
+            return BlockFactory.produceBlock(methodName, parameters);
         } else {
             throw new ObjectExistException("Trying to create a method that already exist");
         }
-        return null;
     }
 
     /**

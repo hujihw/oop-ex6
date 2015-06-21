@@ -10,6 +10,8 @@ public class IfWhileBlock extends SuperBlock {
     }
 
     private void checkParameters(String parameters) { //todo
-
+//        if (!parameters.matches()) {
+//            throw new WrongParametersException("");
+//        }
     }
 }

@@ -24,7 +24,8 @@ public class Manager {
         try {
             mainBlock = (MainBlock) BlockFactory.produceBlock("main", "");
         } catch (IllegalBlockException e) {
-            e.printStackTrace(); // todo fixme
+            System.out.println("1");
+            System.err.println(e.getMessage());
         }
     }
 
