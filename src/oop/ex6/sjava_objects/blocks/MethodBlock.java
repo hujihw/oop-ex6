@@ -12,14 +12,12 @@ import java.util.Scanner;
  */
 public class MethodBlock extends SuperBlock {
     /* Data Members */
-    // data member to hold the signature of the method (parameters by order)
     private Type[] parameterTypes;
     private Scanner scanner;
-    // todo array of parameter types ordered as the method declaration order.
 
-    public MethodBlock(String name, String parameters) throws VariableAlreadyExistException { //todo check MainBlock is ok (was SuperBlock)
+    public MethodBlock(String name, String parameters) throws VariableAlreadyExistException {
         super(name, Manager.getInstance().getMainBlock());
-        System.out.println("Method created!");
+        System.out.println("Method created!"); // tester
         if (!parameters.equals("")){
             parametersToVariables(parameters);
         }
@@ -50,6 +48,7 @@ public class MethodBlock extends SuperBlock {
     /**
      * Called to check validity of parameters on method call.
      * @param parameters    A string of the parameters
+     * @return true if the parameters match the methods parameters, or throw an exception else.
      */
     public boolean checkParameters(String parameters) throws SJavaException {
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
@@ -59,13 +58,19 @@ public class MethodBlock extends SuperBlock {
         if (givenParameters.length == this.parameterTypes.length){
             for (int i = 0; i < givenParameters.length; i++) {
                 if (givenParameters[i].matches(VAR_NAME)){
-                    this.parameterTypes[i].compareType(Finder.assignVar(givenParameters[i], this));
+                    if(!this.parameterTypes[i].compareType(Finder.assignVar(givenParameters[i], this))) {
+                        throw new WrongParametersException("Called method with variable of a wrong type");
+                    }
                 } else {
-                    this.parameterTypes[i].isValid(givenParameters[i]);
+                    if(!this.parameterTypes[i].isValid(givenParameters[i])) {
+                        throw new WrongParametersException("Called method with arguments of wrong type");
+                    }
                 }
             }
+            return true;
+        } else {
+            throw new WrongParametersException("Called method with wrong arguments number");
         }
-        return true;
     }
 
     /**
@@ -83,6 +88,4 @@ public class MethodBlock extends SuperBlock {
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
-
-    // todo method to compare parameters given, with parameters field.
 }

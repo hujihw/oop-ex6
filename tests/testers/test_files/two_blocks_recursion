@@ -2,6 +2,14 @@
 
 void foo() {
     if(true) {
+        while(true) {
+            if(false) {
+
+            }
+        }
+    }
+    while(true) {
+
     }
 return;
 }
