@@ -3,7 +3,6 @@ package oop.ex6.expressions;
 import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
-import oop.ex6.sjava_objects.blocks.IllegalBlockException;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
 import oop.ex6.sjava_objects.variables.SuperVar;
