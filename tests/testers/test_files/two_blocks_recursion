@@ -1,9 +1,9 @@
 void foo() {
-first line in the method;
+//first line in the method;
     if() {
-    first "if" block;
+//    first "if" block;
         while() {
-            the "while" block;
+//            the "while" block;
         }
     }
 return;
