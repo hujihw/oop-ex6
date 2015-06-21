@@ -15,7 +15,7 @@ public class Sjavac {
      * exception cause to the error stream
      * @param args should be one in length of 1, args[0] is the path to the sjavac code file.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) { //todo check in the end the generate javadoc for missing javadoc fields
 
         try {
             if (args.length != 1) {
