@@ -9,8 +9,12 @@ public class SJavaObject {
     /* data members */
     private String name;
 
-    /* methods */
+    /* Constructor */
+    public SJavaObject(String name) {
+        this.name = name;
+    }
 
+    /* methods */
     /**
      * a getter for the name member
      * @return the name of the SJavaObject

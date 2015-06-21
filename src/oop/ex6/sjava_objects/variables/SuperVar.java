@@ -13,7 +13,23 @@ public class SuperVar extends SJavaObject{
     private Type type;
 
     /* Constructors */
+
+    /**
+     * The default constructor.
+     * This constructor gives a name to the created variable.
+     * @param name    The name of the new variable.
+     */
+    public SuperVar(String name) {
+        super(name);
+    }
+
+    /**
+     * A copy constructor.
+     * This constructor copies an existing SuperVar.
+     * @param superVar    The SuperVar object we want to copy.
+     */
     public SuperVar(SuperVar superVar) {
+        super(superVar.getName());
         this.isFinal = superVar.isFinal();
         this.wasInitialized = superVar.isWasInitialized();
         this.type = superVar.getType();

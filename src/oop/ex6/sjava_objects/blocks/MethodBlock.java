@@ -1,6 +1,8 @@
 package oop.ex6.sjava_objects.blocks;
 
 import oop.ex6.main.Manager;
+import oop.ex6.sjava_objects.variables.Type;
+
 import java.util.Scanner;
 
 /**
@@ -9,12 +11,20 @@ import java.util.Scanner;
 public class MethodBlock extends SuperBlock {
     /* Data Members */
     // data member to hold the signature of the method (parameters by order)
+    private Type[] parameters;
     private Scanner scanner;
     // todo array of parameter types ordered as the method declaration order.
 
-    public MethodBlock(String parameters) { //todo check MainBlock is ok (was SuperBlock)
-        super(Manager.getInstance().getMainBlock());
+    public MethodBlock(String name, String parameters) { //todo check MainBlock is ok (was SuperBlock)
+        super(name, Manager.getInstance().getMainBlock());
         System.out.println("Method created!");
+
+    }
+
+    public void parametersToArray(String parameters) {
+        final String PARAMETER_SEPARATOR = "\\s*,\\s*";
+
+//        parameters =
     }
 
     /**
@@ -23,7 +33,9 @@ public class MethodBlock extends SuperBlock {
      * @return true if the parameters are valid, false if not.
      */
     public boolean checkParameters(String parameters) {
-        // todo split the parameters. check validity.
+        final String PARAMETER_SEPARATOR = "\\s*,\\s*";
+
+
         return false;
     }
 

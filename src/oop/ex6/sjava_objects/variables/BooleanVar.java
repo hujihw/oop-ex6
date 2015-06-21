@@ -7,8 +7,9 @@ import oop.ex6.sjava_objects.SJavaObject;
  * @author Omri Kaplan
  */
 public class BooleanVar extends SuperVar{
-    public BooleanVar(SuperVar superVar) { // todo wrote this for compilation
-        super(superVar);
+    public BooleanVar(String name) { // todo wrote this for compilation
+        super(name);
+        setType(Type.BOOLEAN);
     }
 
     /* Data Members*/

@@ -23,7 +23,7 @@ public class Manager {
     private Manager(){
         try {
             mainBlock = (MainBlock) BlockFactory.produceBlock("main", "");
-        } catch (IllegalBlockException e) {
+        } catch (SJavaException e) {
             System.out.println("1");
             System.err.println(e.getMessage());
         }

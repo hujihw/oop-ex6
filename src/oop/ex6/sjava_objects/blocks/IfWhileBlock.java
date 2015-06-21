@@ -2,34 +2,33 @@ package oop.ex6.sjava_objects.blocks;
 
 import oop.ex6.expressions.Finder;
 import oop.ex6.sjava_objects.SJavaException;
+import oop.ex6.sjava_objects.variables.Type;
 
 /**
  * @author Omri Kaplan
  */
 public class IfWhileBlock extends SuperBlock {
     public IfWhileBlock(String parameters) throws SJavaException {
-        super(null);
+        super("ifWhile", null);
         checkParameters(parameters);
     }
 
-    private void checkParameters(String parameters) throws SJavaException { //todo
+    private void checkParameters(String parameters) throws SJavaException {
         final String PARAMETERS_SEPARATOR = "\\s*(&&|\\|\\|)\\s*";
-        final String VARIABLE_NAME = "";
-        final String TRUE_FALSE = "";
-        final String NUMBERS = "";
+        final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
 
         String[] parametersArray = parameters.trim().split(PARAMETERS_SEPARATOR);
         for (String parameter : parametersArray) {
-            if (parameter.matches(NUMBERS)) {
-
-            } else if (parameter.matches(TRUE_FALSE)) {
-
-            } else if (parameter.matches(VARIABLE_NAME)) {
-                Finder.assignVar(parameter, this);
-
+            if (parameter.matches(VARIABLE_NAME)) {
+                Type parameterType = Finder.assignVar(parameter, this);
+                if (!(parameterType.compareType(Type.BOOLEAN))) {
+                    throw new WrongParametersException("Trying to initialize an If/While block with the wrong " +
+                            "parameters");
+                }
+            } else if (!(Type.BOOLEAN.isValid(parameter))) {
+                throw new WrongParametersException("Trying to initialize an If/While block with the wrong " +
+                        "parameters");
             }
         }
-//        throw new WrongParametersException("Trying to initialize an If/While block with the wrong " +
-//                "parameters");
     }
 }

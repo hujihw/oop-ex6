@@ -5,7 +5,8 @@ package oop.ex6.sjava_objects.variables;
  * @author Omri Kaplan
  */
 public class IntVar extends SuperVar {
-    public IntVar(SuperVar superVar) { // todo wrote this for compilation
-        super(superVar);
+    public IntVar(String name) {
+        super(name);
+        setType(Type.INT);
     }
 }

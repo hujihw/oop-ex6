@@ -22,7 +22,8 @@ public abstract class SuperBlock extends SJavaObject {
      * Initializes the parent of the new block.
      * @param parent    The block parent of the new block.
      */
-    public SuperBlock(SuperBlock parent) {
+    public SuperBlock(String name, SuperBlock parent) {
+        super(name);
         this.parent = parent;
     }
 

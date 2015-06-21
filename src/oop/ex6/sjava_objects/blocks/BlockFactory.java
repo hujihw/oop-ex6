@@ -1,6 +1,7 @@
 package oop.ex6.sjava_objects.blocks;
 
 import oop.ex6.main.Manager;
+import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * Produce block Objects.
@@ -16,14 +17,14 @@ public class BlockFactory {
      * @return The new block.
      */
     public static SuperBlock produceBlock(String blockType, String parameters) throws
-            IllegalBlockException {
+            SJavaException {
         switch (blockType) {
             case "main":
                 return new MainBlock();
             case "ifWhile":
                 return new IfWhileBlock(parameters);
             default:
-                return new MethodBlock(parameters);
+                return new MethodBlock(blockType, parameters);
         }
     }
 }

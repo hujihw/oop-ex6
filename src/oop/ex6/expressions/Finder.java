@@ -1,6 +1,7 @@
 package oop.ex6.expressions;
 
 import oop.ex6.main.Manager;
+import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
 import oop.ex6.sjava_objects.blocks.IllegalBlockException;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
@@ -23,12 +24,7 @@ public class Finder {
      */
     static boolean callMethod(String methodName, String parameters) {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
-        //noinspection SimplifiableIfStatement
-        if (found != null) {
-            return found.checkParameters(parameters);
-        } else {
-            return false;
-        }
+        return (found != null) && found.checkParameters(parameters);
     }
 
     /**
@@ -37,7 +33,7 @@ public class Finder {
      * @param parameters    The parameters of the method.
      * @return The new method block object if it was not exist, or null if it was.
      */
-    static SuperBlock declareMethod(String methodName, String parameters) throws ObjectExistException, IllegalBlockException {
+    static SuperBlock declareMethod(String methodName, String parameters) throws SJavaException {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         if (found == null) {
             return BlockFactory.produceBlock(methodName, parameters);

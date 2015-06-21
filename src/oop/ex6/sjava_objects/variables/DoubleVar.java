@@ -5,8 +5,9 @@ package oop.ex6.sjava_objects.variables;
  * @author Omri Kaplan
  */
 public class DoubleVar extends SuperVar{
-    public DoubleVar(SuperVar superVar) { // todo wrote this for compilation
-        super(superVar);
+    public DoubleVar(String name) { // todo wrote this for compilation
+        super(name);
+        setType(Type.DOUBLE);
     }
     // todo can be initialized with type int.
 }
