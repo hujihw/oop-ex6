@@ -2,7 +2,6 @@
 int a;
 void foo() {
     if(true) {
-        a = 5;
         while(true) {
             if(false) {
 

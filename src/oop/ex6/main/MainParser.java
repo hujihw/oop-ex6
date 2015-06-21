@@ -32,7 +32,7 @@ class MainParser {
      */
     static MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException {
 
-        MainBlock mainBlock = (MainBlock) BlockFactory.produceBlock("main", "");
+        MainBlock mainBlock = Manager.getInstance().getMainBlock();
         scanner = new Scanner(theFile);
 
         while (scanner.hasNextLine()){

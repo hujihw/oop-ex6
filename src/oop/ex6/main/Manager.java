@@ -16,13 +16,12 @@ public class Manager {
 
     /* Data Members */
     private MainBlock mainBlock;
-    private File theFile; // todo maybe needs to be package-local.
     private static Manager ourInstance = new Manager();
 
     /* Constructor */
     private Manager(){
         try {
-            mainBlock = (MainBlock) BlockFactory.produceBlock("main", "");
+            this.mainBlock = (MainBlock) BlockFactory.produceBlock("main", "");
         } catch (SJavaException e) {
             System.out.println("1");
             System.err.println(e.getMessage());
@@ -37,9 +36,9 @@ public class Manager {
      */
     void mainProcedure (String sJavaFilePath) throws BadFileException, FileNotFoundException {
         try {
-            theFile = new File(sJavaFilePath);
-            mainBlock = MainParser.parseFile(theFile);
-            for (MethodBlock method : mainBlock.getAllMethods()) { // todo verify not returning null.
+            File theFile = new File(sJavaFilePath);
+            this.mainBlock = MainParser.parseFile(theFile);
+            for (MethodBlock method : mainBlock.getAllMethods()) {
                 BlockParser.getInstance().parseMethod(method);
             }
             System.out.println("0");
@@ -54,7 +53,7 @@ public class Manager {
      * @return The main block.
      */
     public MainBlock getMainBlock() {
-        return mainBlock;
+        return this.mainBlock;
     }
 
     /**
