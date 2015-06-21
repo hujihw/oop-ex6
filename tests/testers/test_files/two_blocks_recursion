@@ -16,5 +16,6 @@ return;
 }
 
 void goo(boolean b) {
+foo();
 return;
 }
