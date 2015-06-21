@@ -50,15 +50,15 @@ public class Finder {
      * @return the variable if it was found.
      * @throws SJavaException throws any SJavaException onwards
      */
-    public static SuperVar assignVar(String varName, SuperBlock currentBlock) throws SJavaException{
+    public static Type assignVar(String varName, SuperBlock currentBlock) throws SJavaException{
         SuperVar found = currentBlock.getVariable(varName);
         if (found != null) {
-            return found;
+            return found.getType();
         } else {
             found = findVarInOuterBlocks(varName, currentBlock);
             SuperVar copiedVar = new SuperVar(found);
             currentBlock.addVariable(varName, copiedVar);
-            return copiedVar;
+            return copiedVar.getType();
         }
     }
 
