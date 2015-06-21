@@ -44,7 +44,7 @@ class MainParser {
                 for (SJavaObject object: objectsArray){
                     if (object instanceof MethodBlock){
                         Scanner methodScanner = new Scanner(theFile);
-                        methodScanner.findWithinHorizon(line, 0); // zero horizon means no bounding to the search
+                        methodScanner.findWithinHorizon(line, line.length()); //todo check! maybe add -1
                         ((MethodBlock) object).setScanner(methodScanner); //todo test!
                         mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
                         advanceToClosingBracket();

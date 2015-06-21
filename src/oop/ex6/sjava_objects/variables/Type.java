@@ -5,7 +5,7 @@ package oop.ex6.sjava_objects.variables;
  * @author Omri Kaplan & Asaf Etzion
  */
 public enum Type {
-    BOOLEAN ("boolean", "true|false"),
+    BOOLEAN ("boolean", "true|false|-?\\d+(\\.\\d+)?"),
     CHAR ("char", "('.')"),
     DOUBLE ("double", "-?\\d+(\\.\\d+)?"),
     INT ("int", "-?\\d+"),
