@@ -83,10 +83,9 @@ class MainParser {
 
     /**
      * Filter the comments and empty lines and sends other lines to ExpressionDefiner.
-     * @return null if its a white space only or comment line, or what the defineExpression returned (SJavaObject[]).
      * @param line the line to parse.
      * @param currentBlock the block that which we are parsing in.
-     * @return return the SJava Object returned from ExpressionDefiner, or null if the line was a comment or blank.
+     * @return null if its a white space only or comment line, or what the defineExpression returned (SJavaObject[]).
      * @throws SJavaException throws any SJavaException onwards.
      */
     static SJavaObject[] commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) throws SJavaException { // todo test
