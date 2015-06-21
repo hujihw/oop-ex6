@@ -23,7 +23,7 @@ public class ExpressionsDefiner {
 
     final String METHOD_NAME = "[a-zA-Z]\\w*";
     final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
-    final String VARIABLE_TYPE = "(final\\s+)?\\s*(int|double|String|boolean|char)";
+    final String VARIABLE_TYPE = "((final)\\s+)?\\s*(int|double|String|boolean|char)";
     final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
     final String NUMBERS = "-?\\d+(\\.\\d+)?";
     final String VARIABLE_VALUE_OR_NAME = "(true|false|\".*\"|'.'|" + NUMBERS + "|" + VARIABLE_NAME + ")";
@@ -103,10 +103,10 @@ public class ExpressionsDefiner {
                 return null;
             }
         } else if (variableDeclaration.matches()){
-            String varType = variableDeclaration.group(2);
-            String finalFlag = variableDeclaration.group(1).trim();
+            String varType = variableDeclaration.group(3);
+            String finalFlag = variableDeclaration.group(2);
             final String commaWithSpaces = "\\s*,\\s*";
-            String[] variablesAndAssignment = variableDeclaration.group(3).trim().split(commaWithSpaces);
+            String[] variablesAndAssignment = variableDeclaration.group(4).trim().split(commaWithSpaces);
             return variablesDeclarationMethod(finalFlag, varType, variablesAndAssignment);
 
         } else if (assignVariable.matches()){
@@ -124,7 +124,7 @@ public class ExpressionsDefiner {
      * @return an array of the variables created.
      * @throws SJavaException throws any SJavaException onwards.
      */
-    private SJavaObject[] variablesDeclarationMethod(String finalflag, String varType, String[] variablesAndAssignment)
+    private SJavaObject[] variablesDeclarationMethod(String finalFlag, String varType, String[] variablesAndAssignment)
             throws SJavaException{
         SJavaObject[] variablesToReturn = new SJavaObject[variablesAndAssignment.length];
         final String variableAndAssignmentRegEx = "\\A(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
@@ -143,8 +143,8 @@ public class ExpressionsDefiner {
             isReservedWordErrorCheck(varName);
             if (Finder.declareVar(varName, currentBlock)) {
                 SuperVar variable;
-                if (finalflag.equals("final")) {
-                    variable = VarFactory.produceVariable(new String[]{finalflag, varType, varName});
+                if (finalFlag != null) {
+                    variable = VarFactory.produceVariable(new String[]{finalFlag, varType, varName});
                 } else {
                     variable = VarFactory.produceVariable(new String[]{varType, varName});
                 }
@@ -175,7 +175,7 @@ public class ExpressionsDefiner {
             return;
         }
         if (value.matches(VARIABLE_NAME)) {
-            Type valueType = Finder.assignVar(value, currentBlock).getType();
+            Type valueType = Finder.wasVarInitialized(value, currentBlock);
             if (varType.compareType(valueType) ||
                     (varType.getType().equals("double") && valueType.getType().equals("int"))) {
                 return; // for readability
