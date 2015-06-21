@@ -103,15 +103,11 @@ public class ExpressionsDefiner {
                 return null;
             }
         } else if (variableDeclaration.matches()){
-            String varType;
-            if (variableDeclaration.group(1) != null){
-                varType = variableDeclaration.group(1) + variableDeclaration.group(2); // final+type
-            } else {
-                varType = variableDeclaration.group(2);
-            }
+            String varType = variableDeclaration.group(2);
+            String finalFlag = variableDeclaration.group(1).trim();
             final String commaWithSpaces = "\\s*,\\s*";
             String[] variablesAndAssignment = variableDeclaration.group(3).trim().split(commaWithSpaces);
-            return variablesDeclarationMethod(varType, variablesAndAssignment);
+            return variablesDeclarationMethod(finalFlag, varType, variablesAndAssignment);
 
         } else if (assignVariable.matches()){
             assignVariableMethod(assignVariable.group(1), assignVariable.group(2));
@@ -128,8 +124,8 @@ public class ExpressionsDefiner {
      * @return an array of the variables created.
      * @throws SJavaException throws any SJavaException onwards.
      */
-    private SJavaObject[] variablesDeclarationMethod(String varType, String[] variablesAndAssignment) throws
-            SJavaException{
+    private SJavaObject[] variablesDeclarationMethod(String finalflag, String varType, String[] variablesAndAssignment)
+            throws SJavaException{
         SJavaObject[] variablesToReturn = new SJavaObject[variablesAndAssignment.length];
         final String variableAndAssignmentRegEx = "\\A(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
                 "\\z";
@@ -146,7 +142,12 @@ public class ExpressionsDefiner {
             }
             isReservedWordErrorCheck(varName);
             if (Finder.declareVar(varName, currentBlock)) {
-                SuperVar variable = VarFactory.produceVariable(new String[]{varType, varName});
+                SuperVar variable;
+                if (finalflag.equals("final")) {
+                    variable = VarFactory.produceVariable(new String[]{finalflag, varType, varName});
+                } else {
+                    variable = VarFactory.produceVariable(new String[]{varType, varName});
+                }
                 if (assignValue != null){
                     if (variable.getType().isValid(assignValue)){
                         variable.setWasInitialized();
