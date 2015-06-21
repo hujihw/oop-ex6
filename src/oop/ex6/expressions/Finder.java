@@ -12,7 +12,7 @@ import oop.ex6.sjava_objects.variables.Type;
  * In charge of finding objects up the abstract syntax tree.
  * @author Omri Kaplan and Asaf Etzion
  */
-class Finder {
+public class Finder {
 
     /* Methods */
 
@@ -51,7 +51,7 @@ class Finder {
      * @param varName    The name of the variable to find.
      * @return the Type of the variable if it was found, or null if it was not found.
      */
-    static Type assignVar(String varName, SuperBlock currentBlock) throws ObjectDoesNotExistException{
+    public static Type assignVar(String varName, SuperBlock currentBlock) throws ObjectDoesNotExistException{
         SuperVar found = currentBlock.getVariable(varName);
         if (found == null) {
             SuperBlock currentParent = currentBlock;
