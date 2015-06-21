@@ -31,7 +31,7 @@ public class SuperVar extends SJavaObject{
     public SuperVar(SuperVar superVar) {
         super(superVar.getName());
         this.isFinal = superVar.isFinal();
-        this.wasInitialized = superVar.isWasInitialized();
+        this.wasInitialized = superVar.wasInitialized();
         this.type = superVar.getType();
     }
 
@@ -53,7 +53,7 @@ public class SuperVar extends SJavaObject{
         this.isFinal = isFinal;
     }
 
-    public boolean isWasInitialized() {
+    public boolean wasInitialized() {
         return wasInitialized;
     }
 

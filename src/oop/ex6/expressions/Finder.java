@@ -54,15 +54,49 @@ public class Finder {
             SuperBlock currentParent = currentBlock;
             while (currentBlock.getParent() != null) {
                 currentParent = currentParent.getParent();
-                found = currentParent.getVariable(varName);
-                if (found != null) {
-                    SuperVar copiedVar = new SuperVar(found);
-                    currentBlock.addVariable(varName, copiedVar);
-                    return copiedVar;
+                if (currentParent != null) {
+                    found = currentParent.getVariable(varName);
+                    if (found != null) {
+                        SuperVar copiedVar = new SuperVar(found);
+                        currentBlock.addVariable(varName, copiedVar);
+                        return copiedVar;
+                    }
                 }
             }
         }
         throw new ObjectDoesNotExistException("The variable does not exist");
+    }
+
+    public static Type wasVarInitialized(String varName, SuperBlock currentBlock) throws ObjectDoesNotExistException {
+        SuperVar found = currentBlock.getVariable(varName);
+        if (found != null) {
+            if (checkInitialization(found, currentBlock)){
+
+            }
+        } else {
+            SuperBlock currentParent = currentBlock;
+            while (currentBlock.getParent() != null) {
+                currentParent = currentParent.getParent();
+                found = currentParent.getVariable(varName);
+                if (found != null) {
+                    SuperVar copiedVar = new SuperVar(found);
+                    currentBlock.addVariable(varName, copiedVar);
+                    //return copiedVar;
+                }
+
+            }
+        }
+        return null; //todo remove
+    }
+
+
+    private static boolean checkInitialization(SuperVar variable, SuperBlock currentBlock){
+        if (currentBlock.getParent() != null){ // this is a local variable
+            if (variable.wasInitialized()){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
