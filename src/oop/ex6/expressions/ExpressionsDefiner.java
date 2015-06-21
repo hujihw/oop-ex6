@@ -4,6 +4,7 @@ import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.BlockFactory;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
+import oop.ex6.sjava_objects.variables.SuperVar;
 import oop.ex6.sjava_objects.variables.Type;
 import oop.ex6.sjava_objects.variables.VarFactory;
 
@@ -26,7 +27,7 @@ public class ExpressionsDefiner {
      * @param expression    The expression we want to define.
      * @return The object corresponding with the expression.
      */
-    public static SJavaObject defineExpression(String expression, SuperBlock theCurrentBlock) throws SJavaException{
+    public static SJavaObject[] defineExpression(String expression, SuperBlock theCurrentBlock) throws SJavaException{ //todo decide whether to make singleton and take all of the strings out or make enum (or both?)
 
         final String METHOD_NAME = "[a-zA-Z]\\w*";
         final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
@@ -48,8 +49,8 @@ public class ExpressionsDefiner {
         final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
                 "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*\\z";
 
-        final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
-                "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*\\s*;\\s*\\z";
+        final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+(" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
+                "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*)\\s*;\\s*\\z";
 
         final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE_OR_NAME + "(\\s*,\\s*" +
                 VARIABLE_VALUE_OR_NAME + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
@@ -63,24 +64,26 @@ public class ExpressionsDefiner {
         Matcher assignVariable = Pattern.compile(ASSIGN_VARIABLE).matcher(expression);
 
         currentBlock = theCurrentBlock;
+        //todo check no white spaces in groups!
 
         if (ifWhileDeclaration.matches()) {
             if (currentBlock.getParent()==null) { //meaning this is the main block
                 throw new WrongProtocolDeclaration("can't declare a loop in the main block");
             } else {
                 SuperBlock loopBlock = BlockFactory.produceBlock("ifWhile", ifWhileDeclaration.group(2));
-                loopBlock.setParent(currentBlock); //todo check
-                return loopBlock;
+                if (loopBlock != null) {
+                    loopBlock.setParent(currentBlock); //todo check
+                }
+                return new SJavaObject[]{loopBlock};
             }
         } else if (methodDeclaration.matches()) {
             isReservedWordErrorCheck(methodDeclaration.group(1)); //todo add final support
             if (currentBlock.getParent()==null) { //meaning this is the main block
-                return Finder.declareMethod(methodDeclaration.group(1),methodDeclaration.group(2));
+                return new SJavaObject[]{Finder.declareMethod(methodDeclaration.group(1),methodDeclaration.group(2))};
             } else {
                 throw new WrongProtocolDeclaration("can't declare a method in an inner block");
             }
         } else if (callMethod.matches()){
-            isReservedWordErrorCheck(callMethod.group(1));
             if (currentBlock.getParent()==null) { //meaning this is the main block
                 throw new WrongProtocolDeclaration("can't call a method in the main block");
             } else {
@@ -89,15 +92,38 @@ public class ExpressionsDefiner {
             }
         } else if (variableDeclaration.matches()){
 
-            //todo add a more complex code for multiple vars
-
-            isReservedWordErrorCheck(variableDeclaration.group(/*todo*/));
-            if (Finder.declareVar(variableDeclaration.group(/*todo*/), currentBlock)){
-                return VarFactory.produceVariable(new String[]{variableDeclaration.group(/*todo final+type*/),variableDeclaration.group(/*todo name*/),
-                        variableDeclaration.group(/*todo value or var*/)});
-            } else {
-                throw new ObjectExistException("a variable with the same name already exists in the relevant scope");
+            String varType = variableDeclaration.group(1)+variableDeclaration.group(2); // final+type
+            final String commaWithSpaces = "\\s*,\\s*";
+            String[] variablesAndAssignment = variableDeclaration.group(3).trim().split(commaWithSpaces);
+            SJavaObject[] variablesToReturn = new SJavaObject[variablesAndAssignment.length];
+            final String variableAndAssignmentRegEx = "\\A(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
+                    "\\z";
+            Pattern variableAndAssignmentPattern = Pattern.compile(variableAndAssignmentRegEx);
+            int i = 0;
+            for (String varAndAssignment: variablesAndAssignment){
+                String varName, assignValue = null;
+                Matcher varAndAssignmentMatcher = variableAndAssignmentPattern.matcher(varAndAssignment);
+                if (varAndAssignmentMatcher.matches()){
+                    varName = varAndAssignmentMatcher.group(1);
+                    assignValue = varAndAssignmentMatcher.group(2);
+                } else {
+                    varName = varAndAssignment.trim();
+                }
+                isReservedWordErrorCheck(varName);
+                if (Finder.declareVar(varName, currentBlock)) {
+                    SuperVar variable = VarFactory.produceVariable(new String[]{varType, varName});
+                    if (assignValue != null){
+                        assignVariableMethod(varName, assignValue);
+                    }
+                    variablesToReturn[i] = variable; //todo: its ok- because of the empty var factory
+                } else {
+                    throw new ObjectExistException("a variable with the same name already exists in the relevant " +
+                            "scope");
+                }
+                i++;
             }
+            return variablesToReturn;
+
         } else if (assignVariable.matches()){
             assignVariableMethod(assignVariable.group(1), assignVariable.group(2));
             return null;
@@ -108,11 +134,10 @@ public class ExpressionsDefiner {
 
     private static void assignVariableMethod(String varName, String value) throws SJavaException{
         Type valueType = Finder.assignVar(value, currentBlock);
-        isReservedWordErrorCheck(varName);
         Type varType = Finder.assignVar(varName, currentBlock);
         if (varType.isValid(value) || varType.compareType(valueType) ||
                 (varType.getType().equals("double")&&valueType.getType().equals("int"))){
-            return;
+            return; // for readability
         } else {
             throw new WrongParameterTypeException("a different type of value was expected as a parameter");
         }
