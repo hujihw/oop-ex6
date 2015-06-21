@@ -21,7 +21,7 @@ public class VarFactory {
             case "final":
                 return new FinalDecorator(Arrays.copyOfRange(typeAndName, 1, typeAndName.length));
             default:
-                throw new IllegalVarException("Trying to create a variable of an un recognized type");
+                throw new IllegalVarException("Trying to create a variable of an unrecognized type");
         }
     }
 }

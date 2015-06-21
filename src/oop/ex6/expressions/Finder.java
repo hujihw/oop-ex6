@@ -81,7 +81,7 @@ public class Finder {
                 return found.getType();
             }
         }
-        throw new UnInitLocalVarException("a local variable wasn't initialized before he was used");
+        throw new UnInitLocalVarException("A local variable wasn't initialized before he was used");
     }
 
     /**
