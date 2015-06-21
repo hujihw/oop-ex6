@@ -48,7 +48,7 @@ public class Manager {
             theFile = new File(sJavaFilePath);
             mainBlock = MainParser.parseFile(theFile);
             for (MethodBlock method : mainBlock.getAllMethods()) { // todo verify not returning null.
-                BlockParser.getInstance().parseBlock(method);
+                BlockParser.getInstance().parseMethod(method);
             }
             System.out.println("0");
         } catch (SJavaException e) {
