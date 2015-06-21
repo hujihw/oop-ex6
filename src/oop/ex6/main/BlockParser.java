@@ -62,6 +62,9 @@ class BlockParser {
     void parseBlock(SuperBlock block) throws SJavaException{
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
+            while (line.trim().equals("return;")) {
+                line = scanner.nextLine();
+            }
             if (line.trim().equals("}")) {
                 return;
             }
