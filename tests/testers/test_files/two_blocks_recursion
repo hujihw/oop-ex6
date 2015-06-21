@@ -1,5 +1,7 @@
 // comment
 
+int a = 5;
+
 void foo() {
     if(true) {
         while(true) {
