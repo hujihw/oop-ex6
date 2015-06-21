@@ -32,14 +32,6 @@ public class Manager {
     /* Methods */
 
     /**
-     * The source file object getter
-     * @return the file.
-     */
-    public File getTheSourceFile() {
-        return theFile;
-    }
-
-    /**
      * the main method that runs the whole verifying procedure
      * @param sJavaFilePath the path of the sJava file
      */
