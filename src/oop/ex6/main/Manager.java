@@ -1,6 +1,8 @@
 package oop.ex6.main;
 
 import oop.ex6.sjava_objects.SJavaException;
+import oop.ex6.sjava_objects.blocks.BlockFactory;
+import oop.ex6.sjava_objects.blocks.IllegalBlockException;
 import oop.ex6.sjava_objects.blocks.MainBlock;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import java.io.File;
@@ -18,7 +20,12 @@ public class Manager {
     private static Manager ourInstance = new Manager();
 
     /* Constructor */
-    private Manager() {
+    private Manager(){
+        try {
+            mainBlock = (MainBlock) BlockFactory.produceBlock("main", "");
+        } catch (IllegalBlockException e) {
+            e.printStackTrace(); // todo fixme
+        }
     }
 
     /* Methods */
