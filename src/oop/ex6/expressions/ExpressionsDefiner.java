@@ -148,7 +148,9 @@ public class ExpressionsDefiner {
             if (Finder.declareVar(varName, currentBlock)) {
                 SuperVar variable = VarFactory.produceVariable(new String[]{varType, varName});
                 if (assignValue != null){
-                    assignVariableMethod(varName, assignValue);
+                    if (variable.getType().isValid(assignValue)){
+                        variable.setWasInitialized();
+                    }
                 }
                 variablesToReturn[i] = variable;
             } else {
