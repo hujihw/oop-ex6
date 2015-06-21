@@ -68,13 +68,15 @@ class MainParser {
      */
     static void advanceToClosingBracket() throws UnclosedBlockException{
         int bracketCounter = 1; // starts with 1 because we already passed one opening bracket
+        final String OPENING_BRACKET = ".*(\\{\\s*)", CLOSING_BRACKET = "\\s*\\}\\s*";
+
         while (scanner.hasNext()){
 
             String line = scanner.nextLine();
 
-            if ((line.substring(line.trim().lastIndexOf(" ")+1,line.trim().length()).equals("{"))){ //todo convert maybe to regex
+            if (line.matches(OPENING_BRACKET)){
                 bracketCounter++;
-                } else if (line.trim().equals("}")){
+            } else if (line.matches(CLOSING_BRACKET)){
                 bracketCounter--;
             }
 
