@@ -48,23 +48,23 @@ public class Finder {
      */
     public static Type assignVar(String varName, SuperBlock currentBlock) throws ObjectDoesNotExistException{
         SuperVar found = currentBlock.getVariable(varName);
-        if (found == null) {
+        if (found != null) {
+            found.setWasInitialized(true);
+            return found.getType();
+        } else {
             SuperBlock currentParent = currentBlock;
             while (currentBlock.getParent() != null) {
                 currentParent = currentParent.getParent();
                 found = currentParent.getVariable(varName);
                 if (found != null) {
-                    break;
+                    SuperVar copiedVar = new SuperVar(found);
+                    copiedVar.setWasInitialized(true);
+                    currentBlock.addVariable(varName, copiedVar);
+                    return found.getType();
                 }
             }
         }
-        if (found != null) {
-            SuperVar copiedVar = new SuperVar(found);
-            currentBlock.addVariable(varName, copiedVar);
-            return found.getType();
-        } else {
-            throw new ObjectDoesNotExistException("The variable does not exist");
-        }
+        throw new ObjectDoesNotExistException("The variable does not exist");
     }
 
     /**
