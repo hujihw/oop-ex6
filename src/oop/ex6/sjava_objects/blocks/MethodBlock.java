@@ -20,6 +20,8 @@ public class MethodBlock extends SuperBlock {
         System.out.println("Method created!"); // tester
         if (!parameters.equals("")){
             parametersToVariables(parameters);
+        } else {
+            parameterTypes = new Type[0];
         }
     }
 
@@ -38,7 +40,6 @@ public class MethodBlock extends SuperBlock {
             String[] typeAndName = parameter.split("\\s+");
             if (Finder.declareVar(typeAndName[1], this)) {
                 addVariable(typeAndName[1], VarFactory.produceVariable(typeAndName));
-                System.out.println("getVariable(typeAndName[1]): " + getVariable(typeAndName[1])); // tester
                 this.parameterTypes[i] = this.getVariable(typeAndName[1]).getType();
             } else {
                 throw new VariableAlreadyExistException("Trying to declare an existing local variable.");
@@ -52,6 +53,10 @@ public class MethodBlock extends SuperBlock {
      * @return true if the parameters match the methods parameters, or throw an exception else.
      */
     public boolean checkParameters(String parameters) throws SJavaException {
+        if (this.parameterTypes.length == 0) {
+            return parameters.equals("");
+        }
+
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
         final String VAR_NAME = "";
 

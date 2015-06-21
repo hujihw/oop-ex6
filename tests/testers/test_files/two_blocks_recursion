@@ -1,9 +1,8 @@
 // comment
-
-int a = 5;
-
-void foo(int a) {
+int a;
+void foo() {
     if(true) {
+        boolean b;
         while(true) {
             if(false) {
 
@@ -13,5 +12,10 @@ void foo(int a) {
     while(true) {
 
     }
+return;
+}
+
+void goo(boolean b) {
+foo();
 return;
 }
