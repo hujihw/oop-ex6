@@ -76,7 +76,6 @@ public class ExpressionsDefiner {
         currentBlock = theCurrentBlock;
         //todo check no white spaces in groups!
 
-        System.out.println("the expressions is :"+expression);
 
         if (ifWhileDeclaration.matches()) {
             if (currentBlock.getParent()==null) { //meaning this is the main block

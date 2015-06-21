@@ -18,7 +18,6 @@ public class MethodBlock extends SuperBlock {
 
     public MethodBlock(String name, String parameters) throws SJavaException {
         super(name, Manager.getInstance().getMainBlock());
-        System.out.println("Method created!"); // tester
         if (!parameters.equals("")){
             parametersToVariables(parameters);
         } else {

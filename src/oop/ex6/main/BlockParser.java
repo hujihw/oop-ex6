@@ -47,7 +47,6 @@ class BlockParser {
                 }
             }
             SJavaObject expressionObject[] = MainParser.commentsAndEmptyLinesFilter(line, methodBlock);
-//            System.out.println(expressionObject == null); // tester
             if (expressionObject != null) {
                 varOrBlockHandle(methodBlock, expressionObject);
             }
