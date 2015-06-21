@@ -15,13 +15,13 @@ public class BlockFactory {
      * @param parameters    The parameters relevant for this block's creation.
      * @return The new block.
      */
-    public static SuperBlock produceBlock(String blockType, SuperBlock parent, String parameters) throws
+    public static SuperBlock produceBlock(String blockType, String parameters) throws
             IllegalBlockException {
         switch (blockType) {
             case "main":
                 return new MainBlock();
             case "ifWhile":
-                return new IfWhileBlock(parent, parameters);
+                return new IfWhileBlock(parameters);
             default:
                 return new MethodBlock(parameters);
         }

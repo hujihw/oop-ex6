@@ -47,7 +47,7 @@ class BlockParser {
                     return;
                 }
             }
-            SJavaObject expressionObject = MainParser.commentsAndEmptyLinesFilter(line, methodBlock);
+            SJavaObject expressionObject[] = MainParser.commentsAndEmptyLinesFilter(line, methodBlock);
             System.out.println(expressionObject == null);
             if (expressionObject != null) {
                 varOrBlockHandle(methodBlock, expressionObject);
@@ -83,8 +83,8 @@ class BlockParser {
             ((SuperBlock) theObjects[0]).setParent(currentBlock);
             parseBlock((SuperBlock) theObjects[0]); // todo consider generics, not down casting.
         } else if (theObjects[0] instanceof SuperVar) {
-            for (int i = 0; i < theObjects.length; i++) {
-                currentBlock.addVariable(theObjects[i].getName(), (SuperVar) theObjects[i]);
+            for (SJavaObject theObject : theObjects) {
+                currentBlock.addVariable(theObject.getName(), (SuperVar) theObject);
             }
         }
     }
