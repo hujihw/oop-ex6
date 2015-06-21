@@ -103,8 +103,12 @@ public class ExpressionsDefiner {
                 return null;
             }
         } else if (variableDeclaration.matches()){
-
-            String varType = variableDeclaration.group(1)+variableDeclaration.group(2); // final+type
+            String varType;
+            if (variableDeclaration.group(1) != null){
+                varType = variableDeclaration.group(1) + variableDeclaration.group(2); // final+type
+            } else {
+                varType = variableDeclaration.group(2);
+            }
             final String commaWithSpaces = "\\s*,\\s*";
             String[] variablesAndAssignment = variableDeclaration.group(3).trim().split(commaWithSpaces);
             return variablesDeclarationMethod(varType, variablesAndAssignment);
@@ -163,10 +167,12 @@ public class ExpressionsDefiner {
      * @throws SJavaException throws any SJavaException onwards
      */
     private void assignVariableMethod(String varName, String value) throws SJavaException{
-        Type valueType = Finder.assignVar(value, currentBlock);
         Type varType = Finder.assignVar(varName, currentBlock);
-        if (varType.isValid(value) || varType.compareType(valueType) ||
-                (varType.getType().equals("double")&&valueType.getType().equals("int"))){
+        if (varType.isValid(value)){
+            return;
+        }
+        Type valueType = Finder.assignVar(value, currentBlock);
+        if (varType.compareType(valueType)||(varType.getType().equals("double") && valueType.getType().equals("int"))){
             return; // for readability
         } else {
             throw new WrongParameterTypeException("a different type of value was expected as a parameter");
