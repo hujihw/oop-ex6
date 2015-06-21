@@ -14,7 +14,8 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * //todo
+ * includes the parseFile which is the main method, and the advanceToClosingBracket and commentsAndEmptyLinesFilter
+ * which are helper methods
  * @author Omri Kaplan & Asaf Eztion
  */
 class MainParser {
@@ -37,18 +38,20 @@ class MainParser {
         while (scanner.hasNextLine()){
 
             String line = scanner.nextLine();
-            SJavaObject object = commentsAndEmptyLinesFilter(line, mainBlock);
+            SJavaObject[] objectsArray = commentsAndEmptyLinesFilter(line, mainBlock);
 
-            if (object != null) {
-                if (object instanceof MethodBlock){
-                    Scanner methodScanner = new Scanner(theFile);
-                    methodScanner.findWithinHorizon(line, 0); // zero horizon means no bounding to the search
-                    ((MethodBlock) object).setScanner(methodScanner); //todo test!
-                    mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
-                    advanceToClosingBracket();
-                }
-                else if (object instanceof SuperVar){
-                    mainBlock.addVariable(object.getName(),(SuperVar) object); //todo consider generics
+            if (objectsArray != null) {
+                for (SJavaObject object: objectsArray){
+                    if (object instanceof MethodBlock){
+                        Scanner methodScanner = new Scanner(theFile);
+                        methodScanner.findWithinHorizon(line, 0); // zero horizon means no bounding to the search
+                        ((MethodBlock) object).setScanner(methodScanner); //todo test!
+                        mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
+                        advanceToClosingBracket();
+                    }
+                    else if (object instanceof SuperVar) {
+                        mainBlock.addVariable(object.getName(), (SuperVar) object); //todo consider generics
+                    }
                 }
             }
         }
@@ -80,9 +83,13 @@ class MainParser {
 
     /**
      * Filter the comments and empty lines and sends other lines to ExpressionDefiner.
+     * @return null if its a white space only or comment line, or what the defineExpression returned (SJavaObject[]).
+     * @param line the line to parse.
+     * @param currentBlock the block that which we are parsing in.
      * @return return the SJava Object returned from ExpressionDefiner, or null if the line was a comment or blank.
+     * @throws SJavaException throws any SJavaException onwards.
      */
-    static SJavaObject commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) throws SJavaException { // todo test
+    static SJavaObject[] commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) throws SJavaException { // todo test
 
         Pattern p = Pattern.compile("^//.*|\\s*");
         if (!p.matcher(line).matches()){ //negates the pattern to filter empty lines and line comments
