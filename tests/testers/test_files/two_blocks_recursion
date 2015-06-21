@@ -1,5 +1,5 @@
 // comment
-int a;
+finale int a = 5;
 a = 5;
 void foo() {
     if(true) {
