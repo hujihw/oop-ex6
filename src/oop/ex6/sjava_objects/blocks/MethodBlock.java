@@ -1,8 +1,11 @@
 package oop.ex6.sjava_objects.blocks;
 
+import oop.ex6.expressions.Finder;
 import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.variables.Type;
+import oop.ex6.sjava_objects.variables.VarFactory;
 
+import java.lang.reflect.Field;
 import java.util.Scanner;
 
 /**
@@ -15,16 +18,30 @@ public class MethodBlock extends SuperBlock {
     private Scanner scanner;
     // todo array of parameter types ordered as the method declaration order.
 
-    public MethodBlock(String name, String parameters) { //todo check MainBlock is ok (was SuperBlock)
+    public MethodBlock(String name, String parameters) throws VariableAlreadyExistException { //todo check MainBlock is ok (was SuperBlock)
         super(name, Manager.getInstance().getMainBlock());
         System.out.println("Method created!");
-
+        parametersToVariables(parameters);
     }
 
-    public void parametersToArray(String parameters) {
+    /**
+     * Makes local variables out of the parameters given on declaration.
+     * @param parameters    The parameters given on declaration.
+     */
+    private void parametersToVariables(String parameters) throws VariableAlreadyExistException {
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
 
-//        parameters =
+        String[] parametersArray = parameters.split(PARAMETER_SEPARATOR);
+//        Type[] signatureTypesArray = new Type[parametersArray.length];
+
+        for (String parameter : parametersArray) {
+            String[] typeAndName = parameter.split("\\s*");
+            if (Finder.declareVar(typeAndName[1], this)){
+                addVariable(typeAndName[0], VarFactory.produceVariable(typeAndName));
+            } else {
+                throw new VariableAlreadyExistException("Trying to declare an existing local variable.");
+            }
+        }
     }
 
     /**
