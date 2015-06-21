@@ -3,6 +3,7 @@ package oop.ex6.sjava_objects.blocks;
 import oop.ex6.expressions.Finder;
 import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.SJavaException;
+import oop.ex6.sjava_objects.variables.IllegalVarException;
 import oop.ex6.sjava_objects.variables.Type;
 import oop.ex6.sjava_objects.variables.VarFactory;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class MethodBlock extends SuperBlock {
     private Type[] parameterTypes;
     private Scanner scanner;
 
-    public MethodBlock(String name, String parameters) throws VariableAlreadyExistException {
+    public MethodBlock(String name, String parameters) throws SJavaException {
         super(name, Manager.getInstance().getMainBlock());
         System.out.println("Method created!"); // tester
         if (!parameters.equals("")){
@@ -29,7 +30,7 @@ public class MethodBlock extends SuperBlock {
      * Makes local variables out of the parameters given on declaration.
      * @param parameters    The parameters given on declaration.
      */
-    private void parametersToVariables(String parameters) throws VariableAlreadyExistException {
+    private void parametersToVariables(String parameters) throws SJavaException {
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
 
         String[] parametersArray = parameters.split(PARAMETER_SEPARATOR);

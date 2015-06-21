@@ -4,7 +4,7 @@ package oop.ex6.sjava_objects.variables;
  * @author Omri Kaplan
  */
 public class VarFactory {
-    public static SuperVar produceVariable(String[] typeAndName) {
+    public static SuperVar produceVariable(String[] typeAndName) throws IllegalVarException {
         switch (typeAndName[0]){
             case "boolean":
                 return new BooleanVar(typeAndName[1]);
@@ -16,8 +16,8 @@ public class VarFactory {
                 return new IntVar(typeAndName[1]);
             case "String":
                 return new StringVar(typeAndName[1]);
+            default:
+                throw new IllegalVarException("Trying to create a variable of an un recognized type");
         }
-        return null;
     }
-
 }
