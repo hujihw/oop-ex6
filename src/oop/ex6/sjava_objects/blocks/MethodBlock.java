@@ -37,7 +37,7 @@ public class MethodBlock extends SuperBlock {
             String parameter = parametersArray[i];
             String[] typeAndName = parameter.split("\\s+");
             if (Finder.declareVar(typeAndName[1], this)) {
-                addVariable(typeAndName[0], VarFactory.produceVariable(typeAndName));
+                addVariable(typeAndName[1], VarFactory.produceVariable(typeAndName));
                 System.out.println("getVariable(typeAndName[1]): " + getVariable(typeAndName[1])); // tester
                 this.parameterTypes[i] = this.getVariable(typeAndName[1]).getType();
             } else {
