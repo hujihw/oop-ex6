@@ -170,7 +170,7 @@ public class ExpressionsDefiner {
      * @throws SJavaException throws any SJavaException onwards
      */
     private void assignVariableMethod(String varName, String value) throws SJavaException{
-        Type varType = Finder.assignVar(varName, currentBlock).getType();
+        Type varType = Finder.assignVar(varName, currentBlock);
         if (varType.isValid(value)){
             return;
         }
