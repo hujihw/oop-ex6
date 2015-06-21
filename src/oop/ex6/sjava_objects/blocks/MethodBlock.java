@@ -21,7 +21,9 @@ public class MethodBlock extends SuperBlock {
     public MethodBlock(String name, String parameters) throws VariableAlreadyExistException { //todo check MainBlock is ok (was SuperBlock)
         super(name, Manager.getInstance().getMainBlock());
         System.out.println("Method created!");
-        parametersToVariables(parameters);
+        if (!parameters.equals("")){
+            parametersToVariables(parameters);
+        }
     }
 
     /**
