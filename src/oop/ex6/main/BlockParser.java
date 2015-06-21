@@ -5,7 +5,6 @@ import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
 import oop.ex6.sjava_objects.variables.SuperVar;
-
 import java.util.Scanner;
 
 /**
@@ -48,7 +47,7 @@ class BlockParser {
                 }
             }
             SJavaObject expressionObject[] = MainParser.commentsAndEmptyLinesFilter(line, methodBlock);
-            System.out.println(expressionObject == null);
+//            System.out.println(expressionObject == null); // tester
             if (expressionObject != null) {
                 varOrBlockHandle(methodBlock, expressionObject);
             }

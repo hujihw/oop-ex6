@@ -1,8 +1,10 @@
 // comment
 int a;
+a = 5;
 void foo() {
     if(true) {
         boolean b;
+        b = 5;
         while(true) {
             if(false) {
 

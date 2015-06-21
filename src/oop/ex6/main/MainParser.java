@@ -3,11 +3,11 @@ package oop.ex6.main;
 import oop.ex6.expressions.ExpressionsDefiner;
 import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
+import oop.ex6.sjava_objects.blocks.BlockFactory;
 import oop.ex6.sjava_objects.blocks.MainBlock;
 import oop.ex6.sjava_objects.blocks.MethodBlock;
 import oop.ex6.sjava_objects.blocks.SuperBlock;
 import oop.ex6.sjava_objects.variables.SuperVar;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -32,7 +32,7 @@ class MainParser {
      */
     static MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException {
 
-        MainBlock mainBlock = new MainBlock(); // todo check maybe change to parent is null
+        MainBlock mainBlock = (MainBlock) BlockFactory.produceBlock("main", "");
         scanner = new Scanner(theFile);
 
         while (scanner.hasNextLine()){
@@ -48,7 +48,7 @@ class MainParser {
                         zero horizon means no bounding to the search */
                         methodScanner.findWithinHorizon("\\Q" + line + "\\E", 0);
                         System.out.println("method scanner: "+methodScanner.match().group()); //todo remove
-                        System.out.println("main scanner: "+scanner.match().group()); //todo remove
+                        System.out.println("main scanner: " + scanner.match().group()); //todo remove
                         ((MethodBlock) object).setScanner(methodScanner);
                         mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
                         advanceToClosingBracket();
