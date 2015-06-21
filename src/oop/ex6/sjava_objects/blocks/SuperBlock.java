@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 
 /**
- * //todo
+ * This is the super class of all of the block objects in the S-Java language.
  * @author Omri Kaplan & Asaf Eztion
  */
 public abstract class SuperBlock extends SJavaObject {

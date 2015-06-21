@@ -2,10 +2,9 @@ package oop.ex6.sjava_objects.blocks;
 
 import oop.ex6.expressions.Finder;
 import oop.ex6.main.Manager;
+import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.variables.Type;
 import oop.ex6.sjava_objects.variables.VarFactory;
-
-import java.lang.reflect.Field;
 import java.util.Scanner;
 
 /**
@@ -14,7 +13,7 @@ import java.util.Scanner;
 public class MethodBlock extends SuperBlock {
     /* Data Members */
     // data member to hold the signature of the method (parameters by order)
-    private Type[] parameters;
+    private Type[] parameterTypes;
     private Scanner scanner;
     // todo array of parameter types ordered as the method declaration order.
 
@@ -34,12 +33,14 @@ public class MethodBlock extends SuperBlock {
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
 
         String[] parametersArray = parameters.split(PARAMETER_SEPARATOR);
-//        Type[] signatureTypesArray = new Type[parametersArray.length];
+        this.parameterTypes = new Type[parametersArray.length];
 
-        for (String parameter : parametersArray) {
+        for (int i = 0; i < parametersArray.length; i++) {
+            String parameter = parametersArray[i];
             String[] typeAndName = parameter.split("\\s*");
-            if (Finder.declareVar(typeAndName[1], this)){
+            if (Finder.declareVar(typeAndName[1], this)) {
                 addVariable(typeAndName[0], VarFactory.produceVariable(typeAndName));
+                this.parameterTypes[i] = getVariable(typeAndName[1]).getType();
             } else {
                 throw new VariableAlreadyExistException("Trying to declare an existing local variable.");
             }
@@ -49,13 +50,22 @@ public class MethodBlock extends SuperBlock {
     /**
      * Called to check validity of parameters on method call.
      * @param parameters    A string of the parameters
-     * @return true if the parameters are valid, false if not.
      */
-    public boolean checkParameters(String parameters) {
+    public boolean checkParameters(String parameters) throws SJavaException {
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
+        final String VAR_NAME = "";
 
-
-        return false;
+        String[] givenParameters = parameters.trim().split(PARAMETER_SEPARATOR);
+        if (givenParameters.length == this.parameterTypes.length){
+            for (int i = 0; i < givenParameters.length; i++) {
+                if (givenParameters[i].matches(VAR_NAME)){
+                    this.parameterTypes[i].compareType(Finder.assignVar(givenParameters[i], this));
+                } else {
+                    this.parameterTypes[i].isValid(givenParameters[i]);
+                }
+            }
+        }
+        return true;
     }
 
     /**

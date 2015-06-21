@@ -1,8 +1,8 @@
 package oop.ex6.sjava_objects;
 
 /**
- * todo
- *  @author Omri Kaplan & Asaf Etzion
+ * This is the super class of all of the S-Java language objects.
+ * @author Omri Kaplan & Asaf Etzion
  */
 public class SJavaObject {
 

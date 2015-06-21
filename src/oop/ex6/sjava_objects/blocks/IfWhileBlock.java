@@ -16,10 +16,13 @@ public class IfWhileBlock extends SuperBlock {
     private void checkParameters(String parameters) throws SJavaException {
         final String PARAMETERS_SEPARATOR = "\\s*(&&|\\|\\|)\\s*";
         final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
+        final String TRUE_FALSE = "(true|false)";
 
         String[] parametersArray = parameters.trim().split(PARAMETERS_SEPARATOR);
         for (String parameter : parametersArray) {
-            if (parameter.matches(VARIABLE_NAME)) {
+            if (parameter.matches(TRUE_FALSE)) {
+                continue;
+            } else if (parameter.matches(VARIABLE_NAME)) {
                 Type parameterType = Finder.assignVar(parameter, this);
                 if (!(parameterType.compareType(Type.BOOLEAN))) {
                     throw new WrongParametersException("Trying to initialize an If/While block with the wrong " +

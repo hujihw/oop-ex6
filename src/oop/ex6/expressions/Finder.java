@@ -22,7 +22,7 @@ public class Finder {
      * @param methodName    The name of the method to find.
      * @return true if the object was found, false else.
      */
-    static boolean callMethod(String methodName, String parameters) {
+    static boolean callMethod(String methodName, String parameters) throws SJavaException {
         MethodBlock found = Manager.getInstance().getMainBlock().getMethod(methodName);
         return (found != null) && found.checkParameters(parameters);
     }
