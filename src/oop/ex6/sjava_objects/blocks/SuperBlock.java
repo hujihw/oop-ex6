@@ -19,9 +19,11 @@ public abstract class SuperBlock extends SJavaObject {
 
     /* Constructors */
     /**
-     * The default constructor for SuperBlock.
+     * Initializes the parent of the new block.
+     * @param parent    The block parent of the new block.
      */
-    public SuperBlock() {
+    public SuperBlock(SuperBlock parent) {
+        this.parent = parent;
     }
 
     /* methods */

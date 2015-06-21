@@ -5,6 +5,7 @@ package oop.ex6.sjava_objects.blocks;
  */
 public class IfWhileBlock extends SuperBlock {
     public IfWhileBlock(String parameters) {
+        super(null);
         checkParameters(parameters);
     }
 
