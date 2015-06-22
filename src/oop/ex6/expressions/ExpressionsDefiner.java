@@ -27,8 +27,8 @@ public class ExpressionsDefiner {
     private final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
     private final String NUMBERS = "-?\\d+(\\.\\d+)?";
     private final String VARIABLE_VALUE_OR_NAME = "(true|false|\".*\"|'.'|" + NUMBERS + "|" + VARIABLE_NAME + ")";
-    private final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "((" + VARIABLE_NAME + ")(\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
-            "\\s*)?)";
+    private final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "((" + VARIABLE_NAME + ")(\\s*=\\s*" +
+            VARIABLE_VALUE_OR_NAME + "\\s*)?)";
     private final String LOOP_AND_CONDITION = "(if|while)";
     private final String BOOLEAN_VARIABLE = "(" + NUMBERS + "|true|false|" + VARIABLE_NAME + ")";
     private final String BOOLEAN_OPERATOR = "((" + BOOLEAN_VARIABLE + "\\s*(&&|\\|\\|)\\s*)+" + BOOLEAN_VARIABLE + ")";
@@ -40,13 +40,15 @@ public class ExpressionsDefiner {
     private final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
             "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*\\z";
 
-    private final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+(" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
+    private final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+(" +
+            VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
             "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*)\\s*;\\s*\\z";
 
-    private final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE_OR_NAME + "(\\s*,\\s*" +
-            VARIABLE_VALUE_OR_NAME + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
+    private final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE_OR_NAME +
+            "(\\s*,\\s*" + VARIABLE_VALUE_OR_NAME + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
 
-    private final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME + "\\s*;\\s*\\z";
+    private final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
+            "\\s*;\\s*\\z";
 
     /* Methods */
 
