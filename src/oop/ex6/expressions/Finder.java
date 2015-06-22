@@ -53,14 +53,27 @@ public class Finder {
     public static Type assignVar(String varName, SuperBlock currentBlock) throws SJavaException{
         SuperVar found = currentBlock.getVariable(varName);
         if (found != null) {
+            checkIfFinal(found);
             found.setWasInitialized();
             return found.getType();
         } else {
             found = findVarInOuterBlocks(varName, currentBlock);
             SuperVar copiedVar = new SuperVar(found);
             currentBlock.addVariable(varName, copiedVar);
+            checkIfFinal(found);
             copiedVar.setWasInitialized();
             return copiedVar.getType();
+        }
+    }
+
+    /**
+     * checks if a variable is final and can't be assigned.
+     * @param var the variable
+     * @throws SJavaException throws any SJavaException onwards
+     */
+    private static void checkIfFinal(SuperVar var) throws SJavaException {
+        if (var.isFinal()){
+            throw new VariableIsFinalException("a final variable cant be assigned anew value");
         }
     }
 
