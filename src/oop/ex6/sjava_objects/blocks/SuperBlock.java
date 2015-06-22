@@ -1,5 +1,6 @@
 package oop.ex6.sjava_objects.blocks;
 
+import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.SJavaObject;
 import oop.ex6.sjava_objects.variables.SuperVar;
 
@@ -60,7 +61,7 @@ public abstract class SuperBlock extends SJavaObject {
      * The parent block setter.
      * @param parent    The parent block of the current block.
      */
-    public void setParent(SuperBlock parent) {
+    public void setParent(SuperBlock parent) throws SJavaException {
         this.parent = parent;
     }
 }
