@@ -1,12 +1,22 @@
 package oop.ex6.sjava_objects.variables;
 
+import oop.ex6.sjava_objects.SJavaException;
+
 import java.util.Arrays;
 
 /**
- * @author Omri Kaplan
+ * creates the different variables
+ * @author Omri Kaplan and Asaf Etzion
  */
 public class VarFactory {
-    public static SuperVar produceVariable(String[] typeAndName) throws IllegalVarException {
+
+    /**
+     *
+     * @param typeAndName the wanted type and name of the var
+     * @return the variable object created
+     * @throws SJavaException throws any SJavaException onwards
+     */
+    public static SuperVar produceVariable(String[] typeAndName) throws SJavaException {
         switch (typeAndName[0]){
             case "boolean":
                 return new BooleanVar(typeAndName[1]);

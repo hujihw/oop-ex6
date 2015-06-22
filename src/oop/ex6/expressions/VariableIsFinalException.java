@@ -4,11 +4,11 @@ import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * Called when a final variable is assigned a new value.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class VariableIsFinalException extends SJavaException {
+class VariableIsFinalException extends SJavaException {
 
-    public VariableIsFinalException(String message) {
+    VariableIsFinalException(String message) {
         super(message);
     }
 }

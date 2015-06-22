@@ -2,7 +2,7 @@ package oop.ex6.sjava_objects.variables;
 
 /**
  * Represents the available variables types.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
 public enum Type {
     BOOLEAN ("boolean", "true|false|-?\\d+(\\.\\d+)?"),

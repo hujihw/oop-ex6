@@ -4,7 +4,7 @@ import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * Produce block Objects.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
 public class BlockFactory {
     /**
@@ -14,7 +14,7 @@ public class BlockFactory {
      * @param blockType     The type of the block we want to create.
      * @param parameters    The parameters relevant for this block's creation.
      * @return The new block.
-     * @throws
+     * @throws SJavaException throws any SJavaException onwards
      */
     public static SuperBlock produceBlock(String blockType, String parameters) throws
             SJavaException {

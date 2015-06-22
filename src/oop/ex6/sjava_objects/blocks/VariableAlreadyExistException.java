@@ -3,10 +3,11 @@ package oop.ex6.sjava_objects.blocks;
 import oop.ex6.sjava_objects.SJavaException;
 
 /**
- * @author Omri Kaplan
+ * thrown when the trying to declare a var with the same name in the same scope
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class VariableAlreadyExistException extends SJavaException {
-    public VariableAlreadyExistException(String message) {
+class VariableAlreadyExistException extends SJavaException {
+    VariableAlreadyExistException(String message) {
         super(message);
     }
 }
