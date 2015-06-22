@@ -1,6 +1,6 @@
 omri.kaplan
 etzion.asaf
-// consulted log-in (blank if no  such)
+gal.nachmana erez.levanon danielle.kutner ben.ella
 ExpressionsDefiner.java               The class in charge of defining the S-Java expressions.
 Finder.java                           In charge of finding variables and methods in the abstract compile tree.
 ObjectDoesNotExistException.java      This is thrown by the Finder class if no object was found.
@@ -56,7 +56,15 @@ in order to keep the factory "dumb".
 = implementation =
 =========================
 
-
+The Sjavac class called by a user with a .sjava file. The Manager is than called by the main method, and
+call the main parser to parse the file. The parser sends non comment/empty lines to the ExpressionDefiner,
+and that is where they are sent to the block factory/var factory or just being checked for validity. That's
+how we get the global variables and methods declared in the global scope. The Manager then holds a MainBlock
+object, returned from the parser, that represents the root of an abstract tree of hierarchy between the
+different scopes, and holds the global scopes and variables. The manager then calls the block parser on
+each method, and the process is pretty similar for every method, only now, the parsing is done recursively
+and scopes (blocks) are created within each other, according to where they are declared.
+Every error in the code is followed by the appropriate exception and printing of "1".
 
 ========================
 = answers to questions =
