@@ -7,9 +7,19 @@ import oop.ex6.sjava_objects.variables.Type;
 /**
  * @author Omri Kaplan
  */
+
 public class IfWhileBlock extends SuperBlock {
+    /* Data Members */
+    private String parameters;
+
     public IfWhileBlock(String parameters) throws SJavaException {
         super("ifWhile", null);
+        this.parameters = parameters;
+    }
+
+    @Override
+    public void setParent(SuperBlock parent) throws SJavaException {
+        super.setParent(parent);
         checkParameters(parameters);
     }
 
