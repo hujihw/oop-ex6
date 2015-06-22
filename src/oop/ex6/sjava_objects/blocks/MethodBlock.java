@@ -58,12 +58,12 @@ public class MethodBlock extends SuperBlock {
         }
 
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
-        final String VAR_NAME = "";
+        final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
 
         String[] givenParameters = parameters.trim().split(PARAMETER_SEPARATOR);
         if (givenParameters.length == this.parameterTypes.length){
             for (int i = 0; i < givenParameters.length; i++) {
-                if (givenParameters[i].matches(VAR_NAME)){
+                if (givenParameters[i].matches(VARIABLE_NAME)){
                     if(!this.parameterTypes[i].compareType(Finder.wasVarInitialized(givenParameters[i], this))) {
                         throw new WrongParametersException("Called method with variable of a wrong type");
                     }
