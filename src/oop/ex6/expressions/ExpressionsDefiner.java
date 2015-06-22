@@ -151,11 +151,7 @@ public class ExpressionsDefiner {
                     variable = VarFactory.produceVariable(new String[]{varType, varName});
                 }
                 if (assignValue != null){
-                    if (variable.getType().isValid(assignValue)){
-                        variable.setWasInitialized();
-                    } else {
-                        throw new WrongParameterTypeException("Declaring a variable with wrong value");
-                    }
+                    assignVariableMethod(variable.getName(), assignValue);
                 }
                 variablesToReturn[i] = variable;
             } else {
@@ -174,6 +170,7 @@ public class ExpressionsDefiner {
      * @throws SJavaException throws any SJavaException onwards
      */
     private void assignVariableMethod(String varName, String value) throws SJavaException{
+
         Type varType = Finder.assignVar(varName, currentBlock);
         if (varType.isValid(value)){
             return;

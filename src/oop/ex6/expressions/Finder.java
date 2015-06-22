@@ -53,11 +53,13 @@ public class Finder {
     public static Type assignVar(String varName, SuperBlock currentBlock) throws SJavaException{
         SuperVar found = currentBlock.getVariable(varName);
         if (found != null) {
+            found.setWasInitialized();
             return found.getType();
         } else {
             found = findVarInOuterBlocks(varName, currentBlock);
             SuperVar copiedVar = new SuperVar(found);
             currentBlock.addVariable(varName, copiedVar);
+            copiedVar.setWasInitialized();
             return copiedVar.getType();
         }
     }
