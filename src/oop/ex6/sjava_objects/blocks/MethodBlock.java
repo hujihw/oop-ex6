@@ -3,7 +3,7 @@ package oop.ex6.sjava_objects.blocks;
 import oop.ex6.expressions.Finder;
 import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.SJavaException;
-import oop.ex6.sjava_objects.variables.IllegalVarException;
+import oop.ex6.sjava_objects.variables.SuperVar;
 import oop.ex6.sjava_objects.variables.Type;
 import oop.ex6.sjava_objects.variables.VarFactory;
 import java.util.Scanner;
@@ -39,7 +39,9 @@ public class MethodBlock extends SuperBlock {
             String parameter = parametersArray[i];
             String[] typeAndName = parameter.split("\\s+");
             if (Finder.declareVar(typeAndName[1], this)) {
-                addVariable(typeAndName[typeAndName.length - 1], VarFactory.produceVariable(typeAndName));
+                SuperVar newVar = VarFactory.produceVariable(typeAndName);
+                newVar.setWasInitialized();
+                addVariable(typeAndName[typeAndName.length - 1], newVar);
                 this.parameterTypes[i] = this.getVariable(typeAndName[typeAndName.length - 1]).getType();
             } else {
                 throw new VariableAlreadyExistException("Trying to declare an existing local variable.");
@@ -58,7 +60,7 @@ public class MethodBlock extends SuperBlock {
         }
 
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
-        final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
+        final String VARIABLE_NAME = "([a-z_A-Z]\\w+|[a-zA-Z])";
 
         String[] givenParameters = parameters.trim().split(PARAMETER_SEPARATOR);
         if (givenParameters.length == this.parameterTypes.length){
