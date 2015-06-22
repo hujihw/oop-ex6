@@ -21,7 +21,24 @@ import java.util.regex.Pattern;
 class MainParser {
 
     /* Data Members */
-    private static Scanner scanner;
+    private Scanner scanner;
+    private static MainParser ourInstance = new MainParser();
+
+    /* Constructor */
+    /**
+     * Default singleton constructor.
+     */
+    private MainParser(){
+    }
+
+    /**
+     * The singleton getter.
+     * @return the MainParser instance.
+     */
+    public static MainParser getInstance() {
+        return ourInstance;
+    }
+
 
 
     /* Methods */
@@ -30,7 +47,7 @@ class MainParser {
      * @param theFile the file we want to parse.
      * @return MainBlock the outer scope block which holds the methods and variables.
      */
-    static MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException {
+    MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException {
 
         MainBlock mainBlock = Manager.getInstance().getMainBlock();
         scanner = new Scanner(theFile);
@@ -64,7 +81,7 @@ class MainParser {
      * advances the scanner to the line ending the method declaration.
      * @throws UnclosedBlockException indicates that a method declaration didn't end properly.
      */
-    static void advanceToClosingBracket() throws UnclosedBlockException{
+    void advanceToClosingBracket() throws UnclosedBlockException{
         int bracketCounter = 1; // starts with 1 because we already passed one opening bracket
         final String OPENING_BRACKET = ".*(\\{\\s*)", CLOSING_BRACKET = "\\s*\\}\\s*";
 
@@ -92,7 +109,7 @@ class MainParser {
      * @return null if its a white space only or comment line, or what the defineExpression returned (SJavaObject[]).
      * @throws SJavaException throws any SJavaException onwards.
      */
-    static SJavaObject[] commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) throws SJavaException { // todo test
+    SJavaObject[] commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) throws SJavaException { // todo test
 
         Pattern p = Pattern.compile("^//.*|\\s*");
         if (!p.matcher(line).matches()){ //negates the pattern to filter empty lines and line comments

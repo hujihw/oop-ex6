@@ -37,7 +37,7 @@ public class Manager {
     void mainProcedure (String sJavaFilePath) throws BadFileException, FileNotFoundException {
         try {
             File theFile = new File(sJavaFilePath);
-            this.mainBlock = MainParser.parseFile(theFile);
+            this.mainBlock = MainParser.getInstance().parseFile(theFile);
             for (MethodBlock method : mainBlock.getAllMethods()) {
                 BlockParser.getInstance().parseMethod(method);
             }

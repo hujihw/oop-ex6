@@ -46,7 +46,7 @@ class BlockParser {
                     return;
                 }
             }
-            SJavaObject expressionObject[] = MainParser.commentsAndEmptyLinesFilter(line, methodBlock);
+            SJavaObject expressionObject[] = MainParser.getInstance().commentsAndEmptyLinesFilter(line, methodBlock);
             if (expressionObject != null) {
                 varOrBlockHandle(methodBlock, expressionObject);
             }
@@ -67,7 +67,7 @@ class BlockParser {
                 return;
             }
             // send to Expressions to turn the line into
-            SJavaObject[] expressionObject = MainParser.commentsAndEmptyLinesFilter(line, block);
+            SJavaObject[] expressionObject = MainParser.getInstance().commentsAndEmptyLinesFilter(line, block);
             if (expressionObject != null) {
                 varOrBlockHandle(block, expressionObject);
             }
