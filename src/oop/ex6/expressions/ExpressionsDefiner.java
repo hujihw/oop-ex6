@@ -21,32 +21,32 @@ public class ExpressionsDefiner {
     private static ExpressionsDefiner instance = new ExpressionsDefiner();
     private SuperBlock currentBlock;
 
-    final String METHOD_NAME = "[a-zA-Z]\\w*";
-    final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
-    final String VARIABLE_TYPE = "((final)\\s+)?\\s*(int|double|String|boolean|char)";
-    final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
-    final String NUMBERS = "-?\\d+(\\.\\d+)?";
-    final String VARIABLE_VALUE_OR_NAME = "(true|false|\".*\"|'.'|" + NUMBERS + "|" + VARIABLE_NAME + ")";
-    final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "((" + VARIABLE_NAME + ")(\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
+    private final String METHOD_NAME = "[a-zA-Z]\\w*";
+    private final String VARIABLE_NAME = "_?[a-zA-Z]\\w*";
+    private final String VARIABLE_TYPE = "((final)\\s+)?\\s*(int|double|String|boolean|char)";
+    private final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
+    private final String NUMBERS = "-?\\d+(\\.\\d+)?";
+    private final String VARIABLE_VALUE_OR_NAME = "(true|false|\".*\"|'.'|" + NUMBERS + "|" + VARIABLE_NAME + ")";
+    private final String VARIABLE_NAME_WITH_ASSIGNMENT_OPTION = "((" + VARIABLE_NAME + ")(\\s*=\\s*" + VARIABLE_VALUE_OR_NAME +
             "\\s*)?)";
-    final String LOOP_AND_CONDITION = "(if|while)";
-    final String BOOLEAN_VARIABLE = "(" + NUMBERS + "|true|false|" + VARIABLE_NAME + ")";
-    final String BOOLEAN_OPERATOR = "((" + BOOLEAN_VARIABLE + "\\s*(&&|\\|\\|)\\s*)+" + BOOLEAN_VARIABLE + ")";
-    final String IF_OR_WHILE_PARAMETER = "(" + BOOLEAN_VARIABLE + "|" + BOOLEAN_OPERATOR + ")";
+    private final String LOOP_AND_CONDITION = "(if|while)";
+    private final String BOOLEAN_VARIABLE = "(" + NUMBERS + "|true|false|" + VARIABLE_NAME + ")";
+    private final String BOOLEAN_OPERATOR = "((" + BOOLEAN_VARIABLE + "\\s*(&&|\\|\\|)\\s*)+" + BOOLEAN_VARIABLE + ")";
+    private final String IF_OR_WHILE_PARAMETER = "(" + BOOLEAN_VARIABLE + "|" + BOOLEAN_OPERATOR + ")";
 
-    final String IF_WHILE_DECLARATION = "\\A\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
+    private final String IF_WHILE_DECLARATION = "\\A\\s*" + LOOP_AND_CONDITION + "\\s*\\(\\s*" + IF_OR_WHILE_PARAMETER +
             "\\s*\\)\\s*\\{\\s*\\z";
 
-    final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
+    private final String METHOD_DECLARATION = "\\A\\s*void\\s+(" + METHOD_NAME + ")\\s*\\(\\s*(((\\s*" + PARAMETER +
             "\\s*,\\s*)*(\\s*" + PARAMETER + "\\s*))|)\\s*\\)\\s*\\{\\s*\\z";
 
-    final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+(" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
+    private final String VARIABLE_DECLARATION = "\\A\\s*" + VARIABLE_TYPE + "\\s+(" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION +
             "(\\s*,\\s*" + VARIABLE_NAME_WITH_ASSIGNMENT_OPTION + ")*)\\s*;\\s*\\z";
 
-    final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE_OR_NAME + "(\\s*,\\s*" +
+    private final String CALL_METHOD = "\\A\\s*(" + METHOD_NAME + ")\\s*\\(\\s*((" + VARIABLE_VALUE_OR_NAME + "(\\s*,\\s*" +
             VARIABLE_VALUE_OR_NAME + "\\s*)*" + ")|)\\)\\s*;\\s*\\z";
 
-    final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME + "\\s*;\\s*\\z";
+    private final String ASSIGN_VARIABLE = "\\A\\s*(" + VARIABLE_NAME + ")\\s*=\\s*" + VARIABLE_VALUE_OR_NAME + "\\s*;\\s*\\z";
 
     /* Methods */
 

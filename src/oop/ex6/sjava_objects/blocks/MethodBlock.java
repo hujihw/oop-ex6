@@ -60,7 +60,7 @@ public class MethodBlock extends SuperBlock {
         }
 
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
-        final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
+        final String VARIABLE_NAME = "_?[a-zA-Z]\\w*";
 
         String[] givenParameters = parameters.trim().split(PARAMETER_SEPARATOR);
         if (givenParameters.length == this.parameterTypes.length){
