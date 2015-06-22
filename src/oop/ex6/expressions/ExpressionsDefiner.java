@@ -151,7 +151,7 @@ public class ExpressionsDefiner {
                     variable = VarFactory.produceVariable(new String[]{varType, varName});
                 }
                 if (assignValue != null){
-                    assignVariableMethod(variable.getName(), assignValue);
+                    assignVariableMethod(variable, assignValue);
                 }
                 variablesToReturn[i] = variable;
             } else {
@@ -170,8 +170,28 @@ public class ExpressionsDefiner {
      * @throws SJavaException throws any SJavaException onwards
      */
     private void assignVariableMethod(String varName, String value) throws SJavaException{
-
         Type varType = Finder.assignVar(varName, currentBlock);
+        assignVariableMethodHelper(varType, value);
+    }
+
+    /**
+     * assigns a single variable.
+     * @param variable the variable
+     * @param value the value to assign
+     * @throws SJavaException throws any SJavaException onwards
+     */
+    private void assignVariableMethod(SuperVar variable, String value) throws SJavaException{
+        Type varType = variable.getType();
+        assignVariableMethodHelper(varType, value);
+    }
+
+    /**
+     * completes the variable assigning procedure.
+     * @param varType the type of the var
+     * @param value the value to assign
+     * @throws SJavaException throws any SJavaException onwards
+     */
+    private void assignVariableMethodHelper(Type varType, String value) throws SJavaException {
         if (varType.isValid(value)){
             return;
         }
