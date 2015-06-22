@@ -9,4 +9,10 @@ etzion.asaf
 
 // implementation issues
 
-// answers to questions
+========================
+= answers to questions =
+========================
+
+Question from section 6.1:
+We chose to handle S-Java code errors with a system of exceptions. We have one general S-Java exception,
+which all of the other exceptions inherit from. This way, we could fit the exceptions to our needs.

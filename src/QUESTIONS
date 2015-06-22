@@ -11,7 +11,7 @@
 #3: B b = (B) it.next();
 #4: <? extends A> a = it.next();
 
-w10Answer1 = (0,0)
+w10Answer1 = (1,3)
 # The answer should be a python-tuple of the chosen numbers, i.e. (1,7,3,8) or (2,6,1)
 # optional explanation (a single line):
 
@@ -23,7 +23,7 @@ w10Answer1 = (0,0)
 #3: public void addAndPrintAll(Collection<? extends String>);
 #4: public void addAndPrintAll(List<? extends Object>);
 
-w10Answer2 = 0
+w10Answer2 = 3
 # optional explanation (a single line):
 
 #Week 11 Questions
@@ -39,7 +39,7 @@ w10Answer2 = 0
 #3: true
 #4: null pointer exception
 
-w11Answer1 = 0
+w11Answer1 = 3
 # optional explanation (a single line):
 
 #Pattern p = Pattern.compile("Names:(([a-z]+,)+)\\1*");
@@ -52,5 +52,5 @@ w11Answer1 = 0
 #3: abi,gadi,abi,gadi,abi,gadi,
 #4: abi,gadi,
 
-w11Answer2 = 0
+w11Answer2 = 3
 # optional explanation (a single line):
