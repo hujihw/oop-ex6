@@ -181,6 +181,7 @@ public class ExpressionsDefiner {
      * @throws SJavaException throws any SJavaException onwards
      */
     private void assignVariableMethod(SuperVar variable, String value) throws SJavaException{
+        variable.setWasInitialized();
         Type varType = variable.getType();
         assignVariableMethodHelper(varType, value);
     }
