@@ -60,6 +60,7 @@ public abstract class SuperBlock extends SJavaObject {
     /**
      * The parent block setter.
      * @param parent    The parent block of the current block.
+     * @throws SJavaException throws any SJavaException onwards
      */
     public void setParent(SuperBlock parent) throws SJavaException {
         this.parent = parent;

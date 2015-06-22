@@ -10,7 +10,7 @@ import oop.ex6.sjava_objects.variables.Type;
 
 /**
  * In charge of finding objects up the abstract syntax tree.
- * @author Omri Kaplan and Asaf Etzion
+ * @author Omri Kaplan & Asaf Etzion
  */
 public class Finder {
 

@@ -13,6 +13,10 @@ public class MainBlock extends SuperBlock {
     private Hashtable<String, MethodBlock> methods;
 
     /* Constructors */
+
+    /**
+     * constructor that sets the name and parent of the block and initializes a methods hash table
+     */
     public MainBlock() {
         super("mainBlock", null);
         methods = new Hashtable<>();

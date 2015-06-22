@@ -5,13 +5,19 @@ import oop.ex6.sjava_objects.SJavaException;
 import oop.ex6.sjava_objects.variables.Type;
 
 /**
- * @author Omri Kaplan
+ * represents an if or while block.
+ * @author Omri Kaplan & Asaf Etzion
  */
-
 public class IfWhileBlock extends SuperBlock {
+
     /* Data Members */
     private String parameters;
 
+    /**
+     * constructor that sets the name of the block (ifWhile) its parent block and its parameters.
+     * @param parameters the boolean parameters
+     * @throws SJavaException throws any SJavaException onwards
+     */
     public IfWhileBlock(String parameters) throws SJavaException {
         super("ifWhile", null);
         this.parameters = parameters;
@@ -23,6 +29,11 @@ public class IfWhileBlock extends SuperBlock {
         checkParameters(parameters);
     }
 
+    /**
+     * checks that the parameters are boolean and follow the sjava protocol.
+     * @param parameters the boolean parameters
+     * @throws SJavaException throws any SJavaException onwards
+     */
     private void checkParameters(String parameters) throws SJavaException {
         final String PARAMETERS_SEPARATOR = "\\s*(&&|\\|\\|)\\s*";
         final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
