@@ -30,7 +30,7 @@ BooleanVar.java                       Represents a boolean variable.
 CharVar.java                          Represents a character variable.
 DoubleVar.java                        Represents a double variable.
 FinalDecorator.java                   A decorator used for declaring variables as final.
-IllegalVarException.java              Thrown ***
+IllegalVarException.java              Thrown when trying to create an unrecognized variable.
 IntVar.java                           Represents a integer variable.
 StringVar.java                        Represents a string variable.
 SuperVar.java                         All of the variable classes inherit this class.
@@ -43,10 +43,19 @@ README                                This file.
 = design =
 ==========
 
+We were trying to keep the program as modular and extensible as possible, in order to allow future
+expanding of the abilities and functions of it. We have used several design patterns to solve the problems
+in this exercise: A factory pattern for the blocks and variables objects, in order to retain the single
+choice and open/closed principles. A singleton design pattern for classes needed only one instance, but
+also needed to hold data members. We used inheritance to have an hierarchy of S-Java objects (similar to
+the idea of java objects), in order to keep several behaviors identical to all of the objects, and also
+make it easier to expand the S-Java object types in the future. And we used a decorator for final variables
+in order to keep the factory "dumb".
 
 =========================
 = implementation =
 =========================
+
 
 
 ========================
