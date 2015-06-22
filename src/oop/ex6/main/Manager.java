@@ -64,4 +64,8 @@ public class Manager {
         return ourInstance;
     }
 
+    public static void resetManager() {
+        ourInstance = new Manager();
+    }
+
 }

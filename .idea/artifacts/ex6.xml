@@ -1,0 +1,30 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ex6">
+    <output-path>$PROJECT_DIR$/out/artifacts/ex6</output-path>
+    <root id="archive" name="ex6.jar">
+      <element id="file-copy" path="$PROJECT_DIR$/src/README" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/QUESTIONS" />
+      <element id="directory" name="oop">
+        <element id="directory" name="ex6">
+          <element id="directory" name="expressions">
+            <element id="dir-copy" path="$PROJECT_DIR$/src/oop/ex6/expressions" />
+          </element>
+          <element id="directory" name="main">
+            <element id="dir-copy" path="$PROJECT_DIR$/src/oop/ex6/main" />
+          </element>
+          <element id="directory" name="sjava_objects">
+            <element id="file-copy" path="$PROJECT_DIR$/src/oop/ex6/sjava_objects/IllegalParameterException.java" />
+            <element id="file-copy" path="$PROJECT_DIR$/src/oop/ex6/sjava_objects/SJavaException.java" />
+            <element id="file-copy" path="$PROJECT_DIR$/src/oop/ex6/sjava_objects/SJavaObject.java" />
+            <element id="directory" name="blocks">
+              <element id="dir-copy" path="$PROJECT_DIR$/src/oop/ex6/sjava_objects/blocks" />
+            </element>
+            <element id="directory" name="variables">
+              <element id="dir-copy" path="$PROJECT_DIR$/src/oop/ex6/sjava_objects/variables" />
+            </element>
+          </element>
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

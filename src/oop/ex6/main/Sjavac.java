@@ -21,8 +21,8 @@ public class Sjavac {
             if (args.length != 1) {
                 throw new WrongArgumentsNumberException("the correct use of this application is with one argument");
             }
+            Manager.resetManager();
             Manager.getInstance().mainProcedure(args[0]);
-
         }
         catch (WrongArgumentsNumberException | BadFileException | FileNotFoundException exp){
             String IO_ERROR = "2";
