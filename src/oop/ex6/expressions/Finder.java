@@ -53,19 +53,32 @@ public class Finder {
     public static Type assignVar(String varName, SuperBlock currentBlock) throws SJavaException{
         SuperVar found = currentBlock.getVariable(varName);
         if (found != null) {
+            checkIfFinal(found);
             found.setWasInitialized();
             return found.getType();
         } else {
             found = findVarInOuterBlocks(varName, currentBlock);
             SuperVar copiedVar = new SuperVar(found);
             currentBlock.addVariable(varName, copiedVar);
+            checkIfFinal(found);
             copiedVar.setWasInitialized();
             return copiedVar.getType();
         }
     }
 
     /**
-     * determines if a variable exists and if it is local checks if it was initialized.
+     * checks if a variable is final and can't be assigned.
+     * @param var the variable
+     * @throws SJavaException throws any SJavaException onwards
+     */
+    private static void checkIfFinal(SuperVar var) throws SJavaException {
+        if (var.isFinal()){
+            throw new VariableIsFinalException("a final variable cant be assigned anew value");
+        }
+    }
+
+    /**
+     * determines if a variable exists and if it was initialized.
      * @param varName the name of the variable
      * @param currentBlock the current block
      * @return the type of the variable
@@ -74,16 +87,16 @@ public class Finder {
     public static Type wasVarInitialized(String varName, SuperBlock currentBlock) throws SJavaException {
         SuperVar found = currentBlock.getVariable(varName);
         if (found != null) {
-            if (checkInitialization(found, currentBlock)){
+            if (found.wasInitialized()){
                 return found.getType();
             }
         } else {
             found = findVarInOuterBlocks(varName, currentBlock);
-            if (checkInitialization(found, currentBlock)){
+            if (found.wasInitialized()){
                 return found.getType();
             }
         }
-        throw new UnInitLocalVarException("A local variable wasn't initialized before he was used");
+        throw new UnInitLocalVarException("A variable wasn't initialized before he was used");
     }
 
     /**
@@ -91,10 +104,10 @@ public class Finder {
      * @param varName the name of the variable
      * @param currentBlock the current block
      * @return the variable that he found
-     * @throws ObjectDoesNotExistException
+     * @throws SJavaException throws any SJavaException onwards
      */
     private static SuperVar findVarInOuterBlocks(String varName, SuperBlock currentBlock)
-            throws ObjectDoesNotExistException {
+            throws SJavaException {
         SuperBlock currentParent = currentBlock;
         while (currentParent.getParent() != null) {
             currentParent = currentParent.getParent();
@@ -106,20 +119,6 @@ public class Finder {
         throw new ObjectDoesNotExistException("The variable doesn't exist");
     }
 
-    /**
-     * checks if the variable was initialized if it is local.
-     * @param variable the variable that we are checking
-     * @param currentBlock the relevant block
-     * @return true if it was initialized, false otherwise
-     */
-    private static boolean checkInitialization(SuperVar variable, SuperBlock currentBlock){
-        if (currentBlock.getParent() != null){ // this is a local variable
-            if (variable.wasInitialized()){
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Search for variable name when declaring a variable.
