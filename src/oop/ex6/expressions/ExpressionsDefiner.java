@@ -150,6 +150,8 @@ public class ExpressionsDefiner {
                 if (assignValue != null){
                     if (variable.getType().isValid(assignValue)){
                         variable.setWasInitialized();
+                    } else {
+                        throw new WrongParameterTypeException("Declaring a variable with wrong value");
                     }
                 }
                 variablesToReturn[i] = variable;
