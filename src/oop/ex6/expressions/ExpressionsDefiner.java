@@ -22,7 +22,7 @@ public class ExpressionsDefiner {
     private SuperBlock currentBlock;
 
     final String METHOD_NAME = "[a-zA-Z]\\w*";
-    final String VARIABLE_NAME = "(([a-z_A-Z]\\w+)|[a-zA-Z])";
+    final String VARIABLE_NAME = "[a-z_A-Z]\\w*";
     final String VARIABLE_TYPE = "((final)\\s+)?\\s*(int|double|String|boolean|char)";
     final String PARAMETER = VARIABLE_TYPE + "\\s+" + VARIABLE_NAME;
     final String NUMBERS = "-?\\d+(\\.\\d+)?";
