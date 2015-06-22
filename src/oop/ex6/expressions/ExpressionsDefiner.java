@@ -143,6 +143,9 @@ public class ExpressionsDefiner {
             if (Finder.declareVar(varName, currentBlock)) {
                 SuperVar variable;
                 if (finalFlag != null) {
+                    if (assignValue == null) { // todo tested, remove this message after submission
+                        throw new WrongParameterTypeException("Declaring a final var without assignment");
+                    }
                     variable = VarFactory.produceVariable(new String[]{finalFlag, varType, varName});
                 } else {
                     variable = VarFactory.produceVariable(new String[]{varType, varName});
