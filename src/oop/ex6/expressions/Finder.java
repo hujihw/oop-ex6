@@ -10,7 +10,7 @@ import oop.ex6.sjava_objects.variables.Type;
 
 /**
  * In charge of finding objects up the abstract syntax tree.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
 public class Finder {
 
@@ -19,6 +19,7 @@ public class Finder {
     /**
      * Search for a method in the root block of the abstract compile tree.
      * @param methodName    The name of the method to find.
+     * @param parameters the parameters of the method call.
      * @return true if the object was found, false else.
      * @throws SJavaException throws any SJavaException onwards
      */

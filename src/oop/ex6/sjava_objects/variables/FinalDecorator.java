@@ -1,15 +1,23 @@
 package oop.ex6.sjava_objects.variables;
 
+import oop.ex6.sjava_objects.SJavaException;
+
 /**
- * @author Omri Kaplan
+ * decorates the final function and delegates all of the other variable functions
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class FinalDecorator extends SuperVar {
+class FinalDecorator extends SuperVar {
 
     /* Data Member */
     SuperVar variable;
 
+    /**
+     * constructs a new variable and marks is as final
+     * @param varDeclaration holds tha name and type of the var
+     * @throws SJavaException throws any SJavaException onwards
+     */
     /* Constructor */
-    FinalDecorator(String[] varDeclaration) throws IllegalVarException {
+    FinalDecorator(String[] varDeclaration) throws SJavaException {
         super(varDeclaration[1]);
         this.variable = VarFactory.produceVariable(varDeclaration);
         setIsFinal(true);

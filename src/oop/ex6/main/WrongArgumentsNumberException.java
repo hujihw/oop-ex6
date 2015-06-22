@@ -6,10 +6,10 @@ import java.io.IOException;
 
 /**
  * More than one argument is given by the user when calling "Sjavac" from the command line.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class WrongArgumentsNumberException extends IOException {
-    public WrongArgumentsNumberException(String message) {
+class WrongArgumentsNumberException extends IOException {
+    WrongArgumentsNumberException(String message) {
         super(message);
     }
 }

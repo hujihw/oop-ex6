@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 /**
  * Defines String expressions, and return corresponding S-Java objects.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
 public class ExpressionsDefiner {
 
@@ -74,8 +74,6 @@ public class ExpressionsDefiner {
         Matcher assignVariable = Pattern.compile(ASSIGN_VARIABLE).matcher(expression);
 
         currentBlock = theCurrentBlock;
-        //todo check no white spaces in groups!
-
 
         if (ifWhileDeclaration.matches()) {
             if (currentBlock.getParent()==null) { //meaning this is the main block
@@ -143,7 +141,7 @@ public class ExpressionsDefiner {
             if (Finder.declareVar(varName, currentBlock)) {
                 SuperVar variable;
                 if (finalFlag != null) {
-                    if (assignValue == null) { // todo tested, remove this message after submission
+                    if (assignValue == null) {
                         throw new WrongParameterTypeException("Declaring a final var without assignment");
                     }
                     variable = VarFactory.produceVariable(new String[]{finalFlag, varType, varName});

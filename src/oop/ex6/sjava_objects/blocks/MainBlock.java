@@ -5,7 +5,7 @@ import java.util.Hashtable;
 
 /**
  * represents the main block which is the most outer scope of the Sjava code.
- * @author Omri Kaplan & Asaf Eztion
+ * @author Omri Kaplan and Asaf Eztion
  */
 public class MainBlock extends SuperBlock {
 
@@ -17,7 +17,7 @@ public class MainBlock extends SuperBlock {
     /**
      * constructor that sets the name and parent of the block and initializes a methods hash table
      */
-    public MainBlock() {
+    MainBlock() {
         super("mainBlock", null);
         methods = new Hashtable<>();
     }

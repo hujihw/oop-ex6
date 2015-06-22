@@ -6,9 +6,9 @@ import oop.ex6.sjava_objects.variables.Type;
 
 /**
  * represents an if or while block.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class IfWhileBlock extends SuperBlock {
+class IfWhileBlock extends SuperBlock {
 
     /* Data Members */
     private String parameters;
@@ -18,7 +18,7 @@ public class IfWhileBlock extends SuperBlock {
      * @param parameters the boolean parameters
      * @throws SJavaException throws any SJavaException onwards
      */
-    public IfWhileBlock(String parameters) throws SJavaException {
+    IfWhileBlock(String parameters) throws SJavaException {
         super("ifWhile", null);
         this.parameters = parameters;
     }

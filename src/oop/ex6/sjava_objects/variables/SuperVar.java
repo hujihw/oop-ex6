@@ -3,7 +3,8 @@ package oop.ex6.sjava_objects.variables;
 import oop.ex6.sjava_objects.SJavaObject;
 
 /**
- * @author Omri Kaplan
+ * the super class of all of the variables
+ * @author Omri Kaplan and Asaf Etzion
  */
 public class SuperVar extends SJavaObject{
 
@@ -37,26 +38,49 @@ public class SuperVar extends SJavaObject{
 
     /* Methods */
 
+    /**
+     * gets the type
+     * @return the type
+     */
     public Type getType() {
         return type;
     }
 
+    /**
+     * sets the type
+     * @param type the type to be set
+     */
     void setType(Type type) {
         this.type = type;
     }
 
+    /**
+     * checks if var is final
+     * @return true if so
+     */
     public boolean isFinal() {
         return isFinal;
     }
 
+    /**
+     * sets the final flag
+     * @param isFinal the boolean setting value
+     */
     void setIsFinal(boolean isFinal) {
         this.isFinal = isFinal;
     }
 
+    /**
+     * checks if the var was initialized
+     * @return true if so
+     */
     public boolean wasInitialized() {
         return wasInitialized;
     }
 
+    /**
+     * sets the var to be initialized
+     */
     public void setWasInitialized() {
         this.wasInitialized = true;
     }

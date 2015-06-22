@@ -9,14 +9,21 @@ import oop.ex6.sjava_objects.variables.VarFactory;
 import java.util.Scanner;
 
 /**
- * @author Omri Kaplan
+ * represents a method block, can check if a call to this method is valid.
+ * @author Omri Kaplan and Asaf Eztion
  */
 public class MethodBlock extends SuperBlock {
     /* Data Members */
     private Type[] parameterTypes;
     private Scanner scanner;
 
-    public MethodBlock(String name, String parameters) throws SJavaException {
+    /**
+     * constructs new method block
+     * @param name the name of the method
+     * @param parameters the parameters it will need to be called
+     * @throws SJavaException throws any SJavaException onwards
+     */
+    MethodBlock(String name, String parameters) throws SJavaException {
         super(name, Manager.getInstance().getMainBlock());
         if (!parameters.equals("")){
             parametersToVariables(parameters);
@@ -28,6 +35,7 @@ public class MethodBlock extends SuperBlock {
     /**
      * Makes local variables out of the parameters given on declaration.
      * @param parameters    The parameters given on declaration.
+     * @throws SJavaException throws any SJavaException onwards
      */
     private void parametersToVariables(String parameters) throws SJavaException {
         final String PARAMETER_SEPARATOR = "\\s*,\\s*";
@@ -53,6 +61,7 @@ public class MethodBlock extends SuperBlock {
      * Called to check validity of parameters on method call.
      * @param parameters    A string of the parameters
      * @return true if the parameters match the methods parameters, or throw an exception else.
+     * @throws SJavaException throws any SJavaException onwards
      */
     public boolean checkParameters(String parameters) throws SJavaException {
         if (this.parameterTypes.length == 0) {

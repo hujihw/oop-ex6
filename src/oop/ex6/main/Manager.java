@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 
 /**
  * The manager of the whole verification process. Calls the MainParser an BlockParser, and holds the MainBlock.
- * @author Asaf Etzion & Omri Kaplan
+ * @author Asaf Etzion and Omri Kaplan
  */
 public class Manager {
 
@@ -32,6 +32,8 @@ public class Manager {
     /**
      * the main method that runs the whole verifying procedure
      * @param sJavaFilePath the path of the sJava file
+     * @throws BadFileException the file is not a proper sjava code file
+     * @throws FileNotFoundException the file wasn't found
      */
     void mainProcedure (String sJavaFilePath) throws BadFileException, FileNotFoundException {
         try {

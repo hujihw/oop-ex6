@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * includes the parseFile which is the main method, and the advanceToClosingBracket and commentsAndEmptyLinesFilter
  * which are helper methods
- * @author Omri Kaplan & Asaf Eztion
+ * @author Omri Kaplan and Asaf Eztion
  */
 class MainParser {
 
@@ -46,6 +46,8 @@ class MainParser {
      * reads the code file and creates the outer scope, meaning it creates the methods and the global variables.
      * @param theFile the file we want to parse.
      * @return MainBlock the outer scope block which holds the methods and variables.
+     * @throws SJavaException throws any SJavaException onwards
+     * @throws FileNotFoundException the file wasn't found
      */
     MainBlock parseFile(File theFile) throws SJavaException, FileNotFoundException {
 
@@ -65,11 +67,11 @@ class MainParser {
                         zero horizon means no bounding to the search */
                         methodScanner.findWithinHorizon("\\Q" + line + "\\E", 0);
                         ((MethodBlock) object).setScanner(methodScanner);
-                        mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
+                        mainBlock.addMethod(object.getName(), (MethodBlock) object);
                         advanceToClosingBracket();
                     }
                     else if (object instanceof SuperVar) {
-                        mainBlock.addVariable(object.getName(), (SuperVar) object); //todo consider generics
+                        mainBlock.addVariable(object.getName(), (SuperVar) object);
                     }
                 }
             }
@@ -109,7 +111,7 @@ class MainParser {
      * @return null if its a white space only or comment line, or what the defineExpression returned (SJavaObject[]).
      * @throws SJavaException throws any SJavaException onwards.
      */
-    SJavaObject[] commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) throws SJavaException { // todo test
+    SJavaObject[] commentsAndEmptyLinesFilter(String line, SuperBlock currentBlock) throws SJavaException {
 
         Pattern p = Pattern.compile("^//.*|\\s*");
         if (!p.matcher(line).matches()){ //negates the pattern to filter empty lines and line comments

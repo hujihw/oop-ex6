@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * parses the blocks and methods. it is singleton also.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
 class BlockParser {
     /* Data Members */
@@ -36,6 +36,7 @@ class BlockParser {
     /**
      * Parse a method block.
      * @param methodBlock    the method block to parse.
+     * @throws SJavaException throws any SJavaException onwards
      */
     void parseMethod(MethodBlock methodBlock) throws SJavaException{
         this.scanner = methodBlock.getScanner();
@@ -57,6 +58,7 @@ class BlockParser {
     /**
      * Recursively parse SJava code blocks (scopes).
      * @param block    the block to parse.
+     * @throws SJavaException throws any SJavaException onwards
      */
     void parseBlock(SuperBlock block) throws SJavaException{
         while (scanner.hasNextLine()) {
@@ -83,7 +85,7 @@ class BlockParser {
     private void varOrBlockHandle(SuperBlock currentBlock, SJavaObject[] theObjects) throws SJavaException{
         if (theObjects[0] instanceof SuperBlock) {
             ((SuperBlock) theObjects[0]).setParent(currentBlock);
-            parseBlock((SuperBlock) theObjects[0]); // todo consider generics, not down casting.
+            parseBlock((SuperBlock) theObjects[0]);
         } else if (theObjects[0] instanceof SuperVar) {
             for (SJavaObject theObject : theObjects) {
                 currentBlock.addVariable(theObject.getName(), (SuperVar) theObject);

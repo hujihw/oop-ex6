@@ -4,7 +4,7 @@ import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * thrown when inputting a parameter with a wrong type.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
 class WrongParameterTypeException extends SJavaException{
 

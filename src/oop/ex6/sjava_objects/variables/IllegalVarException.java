@@ -4,10 +4,10 @@ import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * Raised when factory asked for an unsupported variable.
- * @author Omri Kaplan
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class IllegalVarException extends SJavaException {
-    public IllegalVarException(String message) {
+class IllegalVarException extends SJavaException {
+    IllegalVarException(String message) {
         super(message);
     }
 }

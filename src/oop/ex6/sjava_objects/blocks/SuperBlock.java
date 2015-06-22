@@ -10,7 +10,7 @@ import java.util.Hashtable;
 
 /**
  * This is the super class of all of the block objects in the S-Java language.
- * @author Omri Kaplan & Asaf Eztion
+ * @author Omri Kaplan and Asaf Eztion
  */
 public abstract class SuperBlock extends SJavaObject {
 
@@ -22,8 +22,9 @@ public abstract class SuperBlock extends SJavaObject {
     /**
      * Initializes the parent of the new block.
      * @param parent    The block parent of the new block.
+     * @param name the name of the block
      */
-    public SuperBlock(String name, SuperBlock parent) {
+    SuperBlock(String name, SuperBlock parent) {
         super(name);
         this.parent = parent;
         variables = new Hashtable<>();

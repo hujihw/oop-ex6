@@ -4,10 +4,10 @@ import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * Called when a local variable is referred without initialization.
- * @author Omri Kaplan & Asaf Etzion
+ * @author Omri Kaplan and Asaf Etzion
  */
-public class UnInitLocalVarException extends SJavaException {
-    public UnInitLocalVarException(String message) {
+class UnInitLocalVarException extends SJavaException {
+    UnInitLocalVarException(String message) {
         super(message);
     }
 }
