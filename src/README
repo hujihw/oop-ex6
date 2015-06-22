@@ -1,18 +1,78 @@
 omri.kaplan
 etzion.asaf
 // consulted log-in (blank if no  such)
-<file 1> <description>// list of files with descriptions
-<file 2> <description>
-<file 3> <description>
+ExpressionsDefiner.java               The class in charge of defining the S-Java expressions.
+Finder.java                           In charge of finding variables and methods in the abstract compile tree.
+ObjectDoesNotExistException.java      This is thrown by the Finder class if no object was found.
+ObjectExistException.java             This is thrown by the Finder when trying to declare on an existing.
+SyntaxErrorException.java             Thrown by the ExpressionDefiner if an expression is illegal.
+UnInitLocalVarException.java          Thrown when trying to use a local variable that wasn't initialized.
+VariableIsFinalException.java         Thrown when trying to assign a value to a final variable.
+WrongParameterTypeException.java      Thrown when a wrong parameter type is given whn calling a method.
+WrongProtocolDeclaration.java         Thrown when declaring a variable or a method with a wrong syntax.
+BadFileException.java                 Thrown when trying to parse a file that does not exist or not text file.
+BlockParser.java                      The class that does the parsing of code blocks (scopes).
+MainParser.java                       This class parse the global scope.
+Manager.java                          In charge of communicating with the different modules.
+Sjavac.java                           The Main method is here.
+UnclosedBlockException.java           Thrown when a block doesn't end with "}".
+WrongArgumentsNumberException.java    Thrown when a wrong number of arguments is given to a method.
+BlockFactory.java                     A factory for block objects (methods, if/while).
+IfWhileBlock.java                     Represents an If/While block.
+MainBlock.java                        Represents the global scope.
+MethodBlock.java                      Represents a method block.
+SuperBlock.java                       An abstract class that all blocks inherit.
+VariableAlreadyExistException.java    Thrown when trying to declare a variable that already exists.
+WrongParametersException.java         Thrown on method call when parameters doesn't match the method's.
+SJavaException.java                   Every Exception inherit this class.
+SJavaObject.java                      Every S-Java object inherit this class.
+BooleanVar.java                       Represents a boolean variable.
+CharVar.java                          Represents a character variable.
+DoubleVar.java                        Represents a double variable.
+FinalDecorator.java                   A decorator used for declaring variables as final.
+IllegalVarException.java              Thrown ***
+IntVar.java                           Represents a integer variable.
+StringVar.java                        Represents a string variable.
+SuperVar.java                         All of the variable classes inherit this class.
+Type.java                             An Enum holding the variable types.
+VarFactory.java                       A factory for variable objects.
+QUESTIONS                             File with answered questions from the course staff.
+README                                This file.
 
-// design decisions and issues
+==========
+= design =
+==========
 
-// implementation issues
+
+=========================
+= implementation =
+=========================
+
 
 ========================
 = answers to questions =
 ========================
 
 Question from section 6.1:
-We chose to handle S-Java code errors with a system of exceptions. We have one general S-Java exception,
-which all of the other exceptions inherit from. This way, we could fit the exceptions to our needs.
+
+We handle S-Java code errors with a system of exceptions. We have one general S-Java exception, which all
+of the other exceptions inherit from. This way, we could fit the exceptions to our needs (giving the right
+information about errors and printing informative messages), and also generalize the handling of exceptions
+in the program (with polymorphism).
+We chose to handle the errors this way because it is more intuitive (an error get an exception and not a
+random int or boolean value), and also extensible (making it easier to add specific functionality to
+certain errors and also group errors that require the same handling.)
+
+Question from section 6.2:
+
+* In order to add a new type of variable we need to add it to the saved words regex in ExpressionDefiner, add
+a new class for that type, add this type to the Type enum, and add the name of the type to the VarFactory.
+
+* In order to support an import feature, we'd add a method to the MainParser class that calls the main
+parser on the imported file, and than add its methods and variables to the current mainBlock.
+
+In order to support Unary and Binary operators, we'd add regex patterns to ExpressionDefiner that recognize
+the operators, and a method in that class to handle each operator.
+
+Question from section 6.3:
+
