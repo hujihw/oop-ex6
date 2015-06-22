@@ -47,8 +47,6 @@ class MainParser {
                         /* everything between \Q and \E is considered as escaped.
                         zero horizon means no bounding to the search */
                         methodScanner.findWithinHorizon("\\Q" + line + "\\E", 0);
-                        System.out.println("method scanner: "+methodScanner.match().group()); //todo remove
-                        System.out.println("main scanner: " + scanner.match().group()); //todo remove
                         ((MethodBlock) object).setScanner(methodScanner);
                         mainBlock.addMethod(object.getName(), (MethodBlock) object); //todo consider generics
                         advanceToClosingBracket();
