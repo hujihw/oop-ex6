@@ -9,7 +9,7 @@ public class FinalDecorator extends SuperVar {
     SuperVar variable;
 
     /* Constructor */
-    FinalDecorator(String[] varDeclaration) throws IllegalVarException { // todo update initialized?
+    FinalDecorator(String[] varDeclaration) throws IllegalVarException {
         super(varDeclaration[1]);
         this.variable = VarFactory.produceVariable(varDeclaration);
         setIsFinal(true);
@@ -27,16 +27,6 @@ public class FinalDecorator extends SuperVar {
     }
 
     @Override
-    public boolean isFinal() {
-        return variable.isFinal();
-    }
-
-    @Override
-    public void setIsFinal(boolean isFinal) {
-        variable.setIsFinal(isFinal);
-    }
-
-    @Override
     public boolean wasInitialized() {
         return variable.wasInitialized();
     }
@@ -50,5 +40,4 @@ public class FinalDecorator extends SuperVar {
     public String getName() {
         return variable.getName();
     }
-
 }
