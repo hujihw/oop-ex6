@@ -1,11 +1,10 @@
 package oop.ex6.sjava_objects.blocks;
 
-import oop.ex6.main.Manager;
 import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * Produce block Objects.
- * @author Omri Kaplan
+ * @author Omri Kaplan & Asaf Etzion
  */
 public class BlockFactory {
     /**
@@ -15,6 +14,7 @@ public class BlockFactory {
      * @param blockType     The type of the block we want to create.
      * @param parameters    The parameters relevant for this block's creation.
      * @return The new block.
+     * @throws
      */
     public static SuperBlock produceBlock(String blockType, String parameters) throws
             SJavaException {

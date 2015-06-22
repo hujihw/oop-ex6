@@ -4,7 +4,7 @@ import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * When closing bracket is missing after opening a new block.
- * @author Omri Kaplan
+ * @author Omri Kaplan & Asaf Etzion
  */
 public class UnclosedBlockException extends SJavaException {
     public UnclosedBlockException(String message) {

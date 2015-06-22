@@ -4,7 +4,7 @@ import oop.ex6.sjava_objects.SJavaException;
 
 /**
  * Raised when factory asked for an unsupported block.
- * @author Omri Kaplan
+ * @author Omri Kaplan & Asaf Etzion
  */
 public class IllegalBlockException extends SJavaException {
     public IllegalBlockException(String message) {

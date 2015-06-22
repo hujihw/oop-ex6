@@ -8,6 +8,7 @@ import oop.ex6.sjava_objects.variables.SuperVar;
 import java.util.Scanner;
 
 /**
+ * parses the blocks and methods. it is singleton also.
  * @author Omri Kaplan & Asaf Etzion
  */
 class BlockParser {
